@@ -11,7 +11,7 @@ namespace :filltables do
   
         puts row.inspect
         Genre.create!(
-          type: row[0],
+          genre: row[0],
           
         )
       end
@@ -46,12 +46,13 @@ namespace :filltables do
     contentrating: row[21],
     Year: row[23],
     imdbscore: row[25],
-     #countries_id: nil,
-     #title_list9000s_id: nil,
+     #countries_id: nil, #constraint turned off to for seeding purposes
       )
     end
+  end
 
-    #task seed_three: :environment do
+  task seed_two: :environment do
+
 
     movie = Movie.select(:id, :productioncountry)
     movie.each do |m|        
@@ -62,13 +63,16 @@ namespace :filltables do
       SQL
       ActiveRecord::Base.connection.execute(sql)
       elsif m.productioncountry == 'Soviet Union'
+        relid1 = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = 'Russia'")
         sql = <<-SQL 
-        UPDATE movies SET countries_id = '678' WHERE movies.id = #{m.id}; 
+        UPDATE movies SET countries_id = #{relid1[0].id} WHERE movies.id = #{m.id}; 
         SQL
         ActiveRecord::Base.connection.execute(sql)
       elsif m.productioncountry == 'West Germany'
+        relid2 = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = 'Germany'")
+
         sql = <<-SQL 
-        UPDATE movies SET countries_id = '544' WHERE movies.id = #{m.id}; 
+        UPDATE movies SET countries_id = #{relid2[0].id} WHERE movies.id = #{m.id}; 
         SQL
         ActiveRecord::Base.connection.execute(sql)
 
@@ -81,16 +85,13 @@ namespace :filltables do
       SQL
       ActiveRecord::Base.connection.execute(sql)
     end
-
-     
-    
   end
-p "country foreign keys added to Movie table"
-
+end
 end
 
+###############no longer needed as table dropped due to heroku constraints
+############### but has some useful stuff
 
-  ###############no longer needed but has some useful stuff
   # task seed_four: :environment do
   #   movie = Movie.select(:id, :Title)
   #   movie.each do |m|        
@@ -152,5 +153,3 @@ end
   #   end
 
   # end
-
-

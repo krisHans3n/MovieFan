@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_190319) do
+ActiveRecord::Schema.define(version: 2019_11_14_202353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,19 +25,9 @@ ActiveRecord::Schema.define(version: 2019_11_14_190319) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "type"
+    t.string "genre"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "links", force: :cascade do |t|
-    t.integer "mId"
-    t.integer "imdbId"
-    t.integer "tmdId"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "title_list9000s_id"
-    t.index ["title_list9000s_id"], name: "index_links_on_title_list9000s_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -51,34 +41,13 @@ ActiveRecord::Schema.define(version: 2019_11_14_190319) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "productioncountry"
     t.bigint "countries_id"
-    t.bigint "title_list9000s_id"
     t.string "actor1"
     t.string "actor2"
     t.string "keywords"
     t.string "language"
     t.string "contentrating"
     t.index ["countries_id"], name: "index_movies_on_countries_id"
-    t.index ["title_list9000s_id"], name: "index_movies_on_title_list9000s_id"
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.integer "movieIDk"
-    t.string "tags"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "links_id"
-    t.index ["links_id"], name: "index_tags_on_links_id"
-  end
-
-  create_table "title_list9000s", force: :cascade do |t|
-    t.integer "movieId"
-    t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  add_foreign_key "links", "title_list9000s", column: "title_list9000s_id"
   add_foreign_key "movies", "countries", column: "countries_id"
-  add_foreign_key "movies", "title_list9000s", column: "title_list9000s_id"
-  add_foreign_key "tags", "links", column: "links_id"
 end
