@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_11_185354) do
+ActiveRecord::Schema.define(version: 2019_11_14_190319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 2019_11_11_185354) do
     t.string "productioncountry"
     t.bigint "countries_id"
     t.bigint "title_list9000s_id"
+    t.string "actor1"
+    t.string "actor2"
+    t.string "keywords"
+    t.string "language"
+    t.string "contentrating"
     t.index ["countries_id"], name: "index_movies_on_countries_id"
     t.index ["title_list9000s_id"], name: "index_movies_on_title_list9000s_id"
   end

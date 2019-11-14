@@ -1,0 +1,241 @@
+\dt
+\d enironments
+\d environments
+\dn
+\dv
+\help
+\l
+\l
+\c movieFinder_development
+\dt
+select * from movies limit 10
+table movies
+select * from "movies" limit 10
+\d movies
+\d countries
+select * from movies limit 10;
+select * from "movies" where "movies limit 10;
+\db
+\dt
+\l
+\l
+\c movieFinder_development
+\dt
+\d movie
+\d movies
+select countries_id from movies limit 10;
+select title_list9000s_id from movies limit 10;
+select movies_id from movies limit 10;
+select movie_id from movies limit 10;
+select id from movies limit 10;
+select title_list9000s_id from movies limit 10;
+\l
+\l
+\c movieFinder_development
+\dt
+\dt countries
+\d
+\dt
+\d countrie
+\d countries
+\d movies
+\dt countries
+\d countries
+\d movies
+\d links
+\d genres
+select exit
+\q
+\l
+\c movieFinder_development
+\d
+\d genres
+\d genres_id_seq
+\d movies_id_seq
+\d countries
+select * from countries limit 10;
+select id from countries where Country = 'UK';
+select id from countries where countries.Country = 'UK';
+select id from countries where country = 'UK';
+\d countries
+select * from countries limit 10;
+select * from countries where Country = "UK"
+select * from countries where Country = "UK";
+SELECT * FROM countries WHERE Country = "UK";
+SELECT * FROM countries WHERE "Country" = "UK";
+SELECT * FROM countries WHERE "Country" = 'UK';
+SELECT * FROM countries WHERE \"Country\" = 'UK';
+SELECT id FROM countries WHERE "Country" = 'UK';
+SELECT countries.id FROM countries WHERE "Country" = 'UK';
+SELECT countries.id FROM countries WHERE "Country" = "UK";
+SELECT countries.id FROM countries WHERE "Country" = 'UK';
+SELECT movies.countries_id FROM movies limit 20;
+SELECT countries.id FROM countries WHERE "Country" = 'UK';
+SELECT movies.countries_id FROM movies limit 20;
+SELECT movies.countries_id FROM movies limit 20;
+SELECT movies.countries_id FROM movies limit 20;
+SELECT movies.countries_id FROM movies limit 20;
+SELECT movies.id FROM movies limit 20;
+SELECT countries.Country FROM Country WHERE countries.Country = '718';
+SELECT countries.Country FROM countries WHERE countries.Country = '718';
+SELECT countries.* FROM countries WHERE countries.Country = '718';
+SELECT countries.* FROM countries WHERE countries.country = '718';
+SELECT countries.* FROM countries WHERE \"countries\".\"Country\" = '718';
+SELECT countries.* FROM countries WHERE "countries".\"Country\" = '718';
+SELECT countries.* FROM countries WHERE "countries"."Country" = '718';
+SELECT countries.* FROM countries WHERE "countries"."id" = '718';
+UPDATE movies SET countries_id = '718' WHERE movies.id = '18144'
+UPDATE movies SET "movies"."countries_id" = '718' WHERE "movies"."id" = '18144'
+SELECT countries.* FROM countries WHERE "countries"."id" = '718';
+UPDATE movies SET "movies"."countries_id" = '718' WHERE "movies"."id" = '18144';
+UPDATE movies SET "countries_id" = '718' WHERE "movies"."id" = '18144';
+select * from movies where id = '10449';
+select * from movies where id = '10448';
+select * from movies where id = '10450';
+select * from movies where id = '10449';
+select * from movies where id = '10282';
+select * from movies where id = '10446';
+select * from movies where id = '10447';
+select * from movies where id = '10448';
+select * from movies where id = '10434';
+select * from movies where id = '10448';
+select * from movies where id = '10449';
+select * from movies where id = '1';
+select * from movies where id = '100';
+select * from movies where id = '5000';
+select * from countries where id = '1';
+select * from countries where id = '55';
+select * from movies where id = '10090';
+\q
+\l
+\c movieFinder_development
+UPDATE movies SET countries_id = 'unknown' WHERE movies.id = '10433';
+UPDATE movies SET countries_id = '1' WHERE movies.id = '10433';
+UPDATE movies SET countries_id = 'nil' WHERE movies.id = '10433';
+UPDATE movies SET countries_id = '' WHERE movies.id = '10433';
+UPDATE movies SET countries_id = nil WHERE movies.id = '10433';
+UPDATE movies SET countries_id = null WHERE movies.id = '10433';
+select * from movies where id = '10725';
+select * from movies where productioncountry = '10725';
+select * from movies where productioncountry = 'New Line';
+select * from movies where productioncountry = 'Russia';
+select * from countries where Country = 'Russia';
+SELECT countries.* FROM countries WHERE "countries"."Country" = 'Russia';
+SELECT countries.* FROM countries WHERE "countries"."Country" = 'Germany';
+\d
+select * from title_list9000s where title like '%pulp%';
+select * from title_list9000s where title like '%Pulp%';
+select * from title_list9000s where title like '%Pulp%';
+select * from movies where id = '21151';
+select * from movies where id = '21095';
+select * from movies limit 20;
+select * from movies limit 50;
+select * from movies;
+select * from title_list9000s where title like '%Avatar%';
+select * from title_list9000s where title like '%Avatar %';
+select * from title_list9000s;
+select id from title_list9000s where title like '%Avatar%';
+select id from title_list9000s where title like '%Avatar%';
+select id from title_list9000s where title ~ '%Avatar%';
+select id from title_list9000s where title ~* '%Avatar%';
+select id from title_list9000s where title like '%Avatar%';
+select id from title_list9000s where title like %Avatar%;
+select id from title_list9000s where title like '%Avatar%';
+\q
+\l
+\c movieFinder_development
+select id from title_list9000s where title like %Avatar%;
+select id from title_list9000s where title like '%Avatar%';
+select id from title_list9000s where title like %Avatar %;
+select id from title_list9000s where title like '%Avatar %';
+select id from title_list9000s where title like '%Avatar %';
+\q
+\c movieFinder_development
+SELECT id FROM title_list9000s WHERE title LIKE '%Avatar%'
+select id from title_list9000s where title like '%Avatar %';
+SELECT id FROM title_list9000s WHERE title LIKE '%Avatar%';
+SELECT DISTINCT ON(id) id FROM title_list9000s WHERE title LIKE '%Avatar%';
+\q
+\l
+\c movieFinder_development
+\d
+select * from movies;
+\q
+\c movieFinder_development
+\d
+select * from countries;
+select * from title_list9000s;
+\q
+\c movieFinder_development
+\d
+select * from movies limit 20;
+\q
+\q
+\c movieFinder_development
+\d
+select * from title_list9000s where is = '27';
+select * from title_list9000s where id = '27';
+select * from movies where id = '27';
+\q
+\c movieFinder_development
+select * from title_list9000s where title = 'Titanic';
+select * from title_list9000s where title = 'Pulp Fiction';
+select * from title_list9000s where title like '%Pulp Fiction%';
+select * from title_list9000s where title like '%Titanic%';
+delete from title_list9000s where title = 'Raise the Titanic (1980)';
+delete from title_list9000s where title = 'Titanic (1953)';
+delete from title_list9000s where title = 'Titanica (1992)';
+\q
+\c movieFinder_development
+delete from title_list9000s where title = 'Titanic';
+delete from title_list9000s where title = 'TRON: Legacy';
+select * from title_list9000s where title like '%TRON: Legacy%';
+select * from movies where id = '27';
+select * from movies where title = 'The Great Gatsby';
+select * from movies where \"title\" = 'The Great Gatsby';
+select * from movies where \"Title\" = 'The Great Gatsby';
+select * from movies where Title = 'The Great Gatsby';
+select * from movies where \"Title\" = 'The Great Gatsby';
+select * from movies where \"Title\" = "The Great Gatsby";
+select * from movies where id = '27';
+select * from movies where id = '27';
+delete from title_list9000s where title = 'Titanic';
+select * from movies where id = '27';
+select * from movies ;
+select * from movies where title = 'Titanic' ;
+select * from movies where movies.title = 'Titanic' ;
+select * from movies where "movies"."Title" = 'Titanic' ;
+select * from movies where "movies"."Title" = 'Titanic ' ;
+select * from movies where "movies"."Title" like '%Titanic%' ;
+select * from movies where id = '51' ;
+select * from title_list9000s where title like '%The Great Gatsby%';
+select * from movies where id = '48' ;
+select * from title_list9000s where id = '8426';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World's End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World''s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World\'s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World's End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World''s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World's End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World''s End%';
+select * from title_list9000s where title like '%Pirates%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World's End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World''s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At Worlds End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World's End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World''s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World\"'\"s End%';
+\q
+\c movieFinder_development
+dir
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World\'s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World\"'\"s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World"\'\"s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World"\'\s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World"\'"\s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World"\'\"s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World"\'"\s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World\'\"s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World"\'"\s End%';
+select * from title_list9000s where title like '%Pirates of the Caribbean: At World\"'\"s End%';
