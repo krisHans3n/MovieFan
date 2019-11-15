@@ -1,0 +1,27 @@
+<%= form_with(model: subplan, local: true) do |form| %>
+  <% if subplan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(subplan.errors.count, "error") %> prohibited this subplan from being saved:</h2>
+
+      <ul>
+        <% subplan.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :plantype %>
+    <%= form.text_field :plantype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :recurring %>
+    <%= form.text_field :recurring %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

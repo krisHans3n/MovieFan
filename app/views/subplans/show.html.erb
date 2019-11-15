@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plantype:</strong>
+  <%= @subplan.plantype %>
+</p>
+
+<p>
+  <strong>Recurring:</strong>
+  <%= @subplan.recurring %>
+</p>
+
+<%= link_to 'Edit', edit_subplan_path(@subplan) %> |
+<%= link_to 'Back', subplans_path %>

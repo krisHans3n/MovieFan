@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_202353) do
+ActiveRecord::Schema.define(version: 2019_11_15_191415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,24 @@ ActiveRecord::Schema.define(version: 2019_11_14_202353) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "merchandises", force: :cascade do |t|
+    t.string "name"
+    t.decimal "price"
+    t.string "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "merchorders", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "merchandises_id", null: false
+    t.bigint "orders_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["merchandises_id"], name: "index_merchorders_on_merchandises_id"
+    t.index ["orders_id"], name: "index_merchorders_on_orders_id"
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string "Title"
     t.string "Director"
@@ -46,8 +64,42 @@ ActiveRecord::Schema.define(version: 2019_11_14_202353) do
     t.string "keywords"
     t.string "language"
     t.string "contentrating"
+    t.bigint "merchandises_id"
     t.index ["countries_id"], name: "index_movies_on_countries_id"
+    t.index ["merchandises_id"], name: "index_movies_on_merchandises_id"
   end
 
+  create_table "movieswatcheds", force: :cascade do |t|
+    t.bigint "movies_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movies_id"], name: "index_movieswatcheds_on_movies_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "status"
+    t.decimal "totalprice"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "merchandises_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["merchandises_id"], name: "index_stocks_on_merchandises_id"
+  end
+
+  create_table "subplans", force: :cascade do |t|
+    t.string "plantype"
+    t.boolean "recurring"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "merchorders", "merchandises", column: "merchandises_id"
+  add_foreign_key "merchorders", "orders", column: "orders_id"
   add_foreign_key "movies", "countries", column: "countries_id"
+  add_foreign_key "movies", "merchandises", column: "merchandises_id"
 end

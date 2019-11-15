@@ -1,14 +1,1 @@
-<div id='mapid'></div>
-
-<script type="text/javascript">
-$(function () {
-var mymap = L.map('mapid').setView([54.202617,13.064385], 3.0);
-var mp = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-	maxZoom: 18,
-	id: 'mapbox.streets',
-	accessToken: 'pk.eyJ1Ijoia3Jpc2t1d3JoZml1Z3c0IiwiYSI6ImNrMTN6bHVrNTBjeHMzbW05NHhxcnB6cnQifQ.48UHWbqqoPuuS97OUAPPyg'
-}).addTo(mymap);
-});
-</script>
 

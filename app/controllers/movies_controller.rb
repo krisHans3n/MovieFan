@@ -5,6 +5,17 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all
+
+
+    @country = Country.all
+    @centroids = []
+    @country.each do |r|
+      @template = { "type": "Feature", "properties": {"name": r.Country}, "geometry": {"type": "Point", "coordinates": [r.Long, r.Lat]} }
+
+      @centroids << @template
+    end
+
+
   end
 
   # GET /movies/1

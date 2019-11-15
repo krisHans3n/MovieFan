@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Merchorders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Merchandises</th>
+      <th>Orders</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @merchorders.each do |merchorder| %>
+      <tr>
+        <td><%= merchorder.quantity %></td>
+        <td><%= merchorder.merchandises_id %></td>
+        <td><%= merchorder.orders_id %></td>
+        <td><%= link_to 'Show', merchorder %></td>
+        <td><%= link_to 'Edit', edit_merchorder_path(merchorder) %></td>
+        <td><%= link_to 'Destroy', merchorder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Merchorder', new_merchorder_path %>

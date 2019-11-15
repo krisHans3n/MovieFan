@@ -1,0 +1,2 @@
+module MovieswatchedsHelper
+end

@@ -1,0 +1,32 @@
+<%= form_with(model: merchorder, local: true) do |form| %>
+  <% if merchorder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(merchorder.errors.count, "error") %> prohibited this merchorder from being saved:</h2>
+
+      <ul>
+        <% merchorder.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :merchandises_id %>
+    <%= form.text_field :merchandises_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :orders_id %>
+    <%= form.text_field :orders_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

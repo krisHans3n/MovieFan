@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @merchorder.quantity %>
+</p>
+
+<p>
+  <strong>Merchandises:</strong>
+  <%= @merchorder.merchandises_id %>
+</p>
+
+<p>
+  <strong>Orders:</strong>
+  <%= @merchorder.orders_id %>
+</p>
+
+<%= link_to 'Edit', edit_merchorder_path(@merchorder) %> |
+<%= link_to 'Back', merchorders_path %>
