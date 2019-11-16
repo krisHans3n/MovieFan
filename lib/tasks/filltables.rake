@@ -9,10 +9,8 @@ namespace :filltables do
     Genre.destroy_all
     Merchandise.destroy_all
     
-    ActiveRecord::Base.connection.execute("SET session_replication_role = 'replica';")
+    #ActiveRecord::Base.connection.execute("SET session_replication_role = 'replica';")
 
-
-  
       CSV.foreach("lib/assets/csv/genres.csv", :headers=>true) do |row|
   
         puts row.inspect
@@ -49,6 +47,9 @@ namespace :filltables do
     end
     p "movie item names added"
 
+  #end
+
+
     # statustype = ["shipped", "pending"]
     # total = [5.99, 6.99, 10, 3.99, 7.98, 30, 20, 13.98, 11.98, 50, 23.96]
 
@@ -58,41 +59,56 @@ namespace :filltables do
     #   status: statustype.sample
 
     # end
-
-# merchidtitle = Hash.new { |id, t| id[t] = []}
-# countryidnames = Hash.new { |c_id, n| c_id[n] = []}
-# csvfkcountry = []
-# csvfkmerch =[]
-
-
+# @merchidtitle = Hash.new 
+# @countryidnames = Hash.new 
 
 # @merch = Merchandise.all
+# ct = 0
 # @merch.each do |merch|
-#   puts merch.inspect 
-#   merchidtitle[merch.id] << merch.name 
+#   puts merch.id, merch.name 
+#   @merchidtitle[merch.name] = merch.id
+#   #puts @merchidtitle.inspect
+#   ct += 1
+#   puts "merch counter#{ct}"
 # end 
 
 # @ctrys = Country.all 
 # @ctrys.each do |c|
 #   puts c.inspect
-#   countryidnames[c.id] << c.Country
+#   ctry = c.Country
+#   @countryidnames[ctry] = c.id
 # end
 
+#task seed_two: :environment do
 
-#     CSV.foreach("lib/assets/csv/movie_5000_v.csv", :headers=>true) do |row|
-#       eleven = row[11]
-#       twenty = row[20]
+@csvarray1 = []
+@csvarray2 = []
 
-#       if eleven == nil 
-#         next
-#       elsif 
+    CSV.foreach("lib/assets/csv/movie_5000_v.csv", :headers=>true) do |row|
+      title = row[11]
+      country = row[20]
+      puts country
+
+      t = "%" + title.gsub("'", "''").gsub(/\A\p{Space}*|\p{Space}*\z/, '') + "%"
+      puts t
+      temp_t = Merchandise.find_by_sql("SELECT id FROM merchandises WHERE name LIKE '#{t}' ")
+      puts temp_t[0].id.inspect
+      @csvarray1 << temp_t[0].id
 
 
-#     end
+      temp = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = '#{country}'")
+      if temp.empty?
+        temp = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = 'Unknown'")
+      end
+      puts temp[0].id.inspect
+      @csvarray2 << temp[0].id
+
+     end
+
+     p "success !"
 
 
-
-  #two hashes with nested loops and sanitized before is needed here to maintain FK constraints
+     @counter = 0
     CSV.foreach("lib/assets/csv/movie_5000_v.csv", :headers=>true) do |row|
       
       puts row.inspect
@@ -109,14 +125,57 @@ namespace :filltables do
     contentrating: row[21],
     Year: row[23],
     imdbscore: row[25],
-     #countries_id: 
-     #merchandises_id: 
+     countries_id: @csvarray2[@counter],
+     merchandises_id: @csvarray1[@counter],
       )
+
+      @counter += 1
     end
+  end 
+
+    #  #array for merch matches
+    #  @country_order = []
+    #  @merch_order = []
+    # @csvarray1.each do |csv| #this caused the loop to go once
+    #   @v = csv.to_s
+    #   puts "#{@v}"
+    #   break unless @merchidtitle.each do |key, value|
+    #     count = 0
+    #     puts key, value
+    #     if @v == key 
+    #       @merch_order << value.to_i
+    #       #break
+    #   end
+    #   puts "these are the merch ids: #{@merch_order[count]}"
+    #   count += 1
+    #  end
+    # end
+
+    # #array for country matches
+    # @csvarray2.each do |csv|
+    #   @iv = csv.to_s
+    #   break unless @countryidnames.each do |key, value|
+    #     count = 0
+    #     puts key, value
+    #    if @iv == key 
+    #       @country_order << value.to_i
+    #       break
+    #        if key == nil
+    #           @country_order << Country.select(:id).where(" \"Country\" = 'Unknown'")
+    #          break
+    #        end
+    #   end
+    #   puts @country_order[count]
+    #   count += 1
+    #  end
+    # end
 
 
-    
-  
+
+    #ActiveRecord::Base.connection.execute("SET session_replication_role = 'origin';")
+
+    task old_but_gold: :environment do
+
 
     movie = Movie.select(:id, :productioncountry, :Title)
     movie.each do |m|        
@@ -159,11 +218,9 @@ namespace :filltables do
       ActiveRecord::Base.connection.execute(sql)
     end
   end
-
-  ActiveRecord::Base.connection.execute("SET session_replication_role = 'origin';")
-
-
 end
+
+
 end
 
 
