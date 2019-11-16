@@ -26,6 +26,24 @@ L.geoJSON(centre, {
 
 </script>
 
+<%= form_tag(movies_path, method: :get) do%>
+<%= text_field_tag(:search, params[:search]) %>
+<%= submit_tag ("Search")%>
+<% end %>
+
+<% @flist.each do |mov|%>
+<li><%= link_to mov.Title, movies_path(mov) %></li>
+<% hold = mov.Genre %>
+<% h = hold.split(/[\|]/) %>
+<% h.each do |genres|%>
+<%= puts genres %>
+<% end %>
+<%= mov.imdbscore %>
+
+<ul>
+<li>  mov.Title </li><br>
+</ul>
+<%end%>
 
 <p id="notice"><%= notice %></p>
 
