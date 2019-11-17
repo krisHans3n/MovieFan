@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subscriptionpayments
   resources :merchpayments
   devise_for :users
   resources :movieswatcheds
