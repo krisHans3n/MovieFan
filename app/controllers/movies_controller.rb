@@ -17,11 +17,13 @@ class MoviesController < ApplicationController
       @centroids << @template 
     end
 
+
+    #if params[:search]
     @flist = Movie.search_by_title(params[:search])
-
-    @glist = Movie.search_by_genre(params[:genresearch])
-
-
+    # elsif params[:genresearch]
+    #     @flist = Movie.search_by_genre(params[:genresearch])
+    # end
+    # @flist = @movies
   end
 
   

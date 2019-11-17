@@ -36,19 +36,19 @@ L.geoJSON(centre, {
 <% hold = mov.Genre %>
 <% h = hold.split(/[\|]/) %>
 <% h.each do |genres|%>
-<%= puts genres %>
+<%=  link_to genres, movies_path(genres, params[:genresearch]) %>
 <% end %>
 <%= mov.imdbscore %>
+<%= link_to 'Show', mov %>
 
-<ul>
-<li>  mov.Title </li><br>
-</ul>
 <%end%>
 
 <p id="notice"><%= notice %></p>
 
 
-<table>
+<%
+=begin%>
+ <table>
   <thead>
     <tr>
       <th>Title</th>
@@ -77,7 +77,9 @@ L.geoJSON(centre, {
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> 
+<%
+=end%>
 
 <br>
 

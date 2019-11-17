@@ -1,0 +1,2 @@
+module MerchpaymentsHelper
+end

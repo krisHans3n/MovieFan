@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_16_122256) do
+ActiveRecord::Schema.define(version: 2019_11_17_103935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2019_11_16_122256) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["merchandises_id"], name: "index_merchorders_on_merchandises_id"
     t.index ["orders_id"], name: "index_merchorders_on_orders_id"
+  end
+
+  create_table "merchpayments", force: :cascade do |t|
+    t.bigint "users_id", null: false
+    t.bigint "merchorders_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["merchorders_id"], name: "index_merchpayments_on_merchorders_id"
+    t.index ["users_id"], name: "index_merchpayments_on_users_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -114,6 +123,8 @@ ActiveRecord::Schema.define(version: 2019_11_16_122256) do
 
   add_foreign_key "merchorders", "merchandises", column: "merchandises_id"
   add_foreign_key "merchorders", "orders", column: "orders_id"
+  add_foreign_key "merchpayments", "merchorders", column: "merchorders_id"
+  add_foreign_key "merchpayments", "users", column: "users_id"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
 end

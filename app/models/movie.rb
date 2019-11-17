@@ -4,7 +4,7 @@ belongs_to :merchandise, optional: true
 
 def self.search_by_title(search)
     if search 
-      movie = Movie.select(:id).where(" \"Title\" like ?", "%" + search.gsub(/\A\p{Space}*|\p{Space}*\z/, '') + "%")
+      movie = Movie.select(:id).where(" lower(\"Title\") like ?", "%" + search.gsub(/\A\p{Space}*|\p{Space}*\z/, '').downcase + "%")
       if movie 
         self.where(id: movie)
     else
@@ -18,6 +18,14 @@ end
 
 
 def self.search_by_genre(genresearch)
+    if genresearch 
+        movie = Movie.select(:id).where(" lower(\"Genre\") like ?", "%" + genresearch.gsub(/\A\p{Space}*|\p{Space}*\z/, '').downcase + "%")
+        if movie
+            self.where(id: movie) 
+        end
+        Movie.all
+    end
+    Movie.all
 end
 
 

@@ -1,0 +1,27 @@
+<%= form_with(model: merchpayment, local: true) do |form| %>
+  <% if merchpayment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(merchpayment.errors.count, "error") %> prohibited this merchpayment from being saved:</h2>
+
+      <ul>
+        <% merchpayment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :users_id %>
+    <%= form.text_field :users_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :merchorders_id %>
+    <%= form.text_field :merchorders_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
