@@ -20,6 +20,11 @@ class MoviesController < ApplicationController
 
     #if params[:search]
     @flist = Movie.search_by_title(params[:search])
+
+#
+#subset of genres should be made and and sent to genres controller via view.
+#
+
     # elsif params[:genresearch]
     #     @flist = Movie.search_by_genre(params[:genresearch])
     # end
