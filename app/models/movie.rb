@@ -1,6 +1,7 @@
 class Movie < ApplicationRecord
 belongs_to :countrie, optional: true
 belongs_to :merchandise, optional: true
+has_many :movieswatcheds
 
 def self.search_by_title(search)
     if search 

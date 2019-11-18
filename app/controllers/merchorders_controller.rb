@@ -5,6 +5,10 @@ class MerchordersController < ApplicationController
   # GET /merchorders.json
   def index
     @merchorders = Merchorder.all
+    @item = @merchorders.merchorders.new(merchorder_params)
+    @merchorders.save 
+    session[:orders_id] = @merchorders.id
+    redirect_to merchandises_path
   end
 
   # GET /merchorders/1

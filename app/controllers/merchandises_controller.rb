@@ -5,6 +5,7 @@ class MerchandisesController < ApplicationController
   # GET /merchandises.json
   def index
     @merchandises = Merchandise.all
+    @merch_order = cart_order.merchorders.new
   end
 
   # GET /merchandises/1

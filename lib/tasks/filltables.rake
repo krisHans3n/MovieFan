@@ -6,21 +6,21 @@ namespace :filltables do
 
     Movie.destroy_all
     Country.destroy_all
-    Genre.destroy_all
+    #Genre.destroy_all
     Merchandise.destroy_all
     
     #ActiveRecord::Base.connection.execute("SET session_replication_role = 'replica';")
 
-      CSV.foreach("lib/assets/csv/genres.csv", :headers=>true) do |row|
+    #   CSV.foreach("lib/assets/csv/genres.csv", :headers=>true) do |row|
   
-        puts row.inspect
-        Genre.create!(
-          genre: row[0],
+    #     puts row.inspect
+    #     Genre.create!(
+    #       genre: row[0],
           
-        )
-      end
+    #     )
+    #   end
   
-    p "Basic genre list matching was added"
+    # p "Basic genre list matching was added"
   
 
     CSV.foreach("lib/assets/csv/country_centroids.csv", :headers=>true) do |row|
@@ -132,6 +132,16 @@ namespace :filltables do
       @counter += 1
     end
   end 
+
+
+  task seed_two: :environment do
+
+
+    
+  end
+
+
+
 
     #  #array for merch matches
     #  @country_order = []

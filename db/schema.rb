@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_17_104106) do
+ActiveRecord::Schema.define(version: 2019_11_18_210826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "postcode"
+    t.bigint "users_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_id"], name: "index_addresses_on_users_id"
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string "Ctrycode"
@@ -24,10 +34,15 @@ ActiveRecord::Schema.define(version: 2019_11_17_104106) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "genres", force: :cascade do |t|
-    t.string "genre"
+  create_table "creditcards", force: :cascade do |t|
+    t.integer "number"
+    t.string "expdate"
+    t.string "nameoncard"
+    t.string "organisationtype"
+    t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_id"], name: "index_creditcards_on_users_id"
   end
 
   create_table "merchandises", force: :cascade do |t|
@@ -36,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_11_17_104106) do
     t.string "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "stocknumber"
   end
 
   create_table "merchorders", force: :cascade do |t|
@@ -82,7 +98,9 @@ ActiveRecord::Schema.define(version: 2019_11_17_104106) do
     t.bigint "movies_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "users_id"
     t.index ["movies_id"], name: "index_movieswatcheds_on_movies_id"
+    t.index ["users_id"], name: "index_movieswatcheds_on_users_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -90,14 +108,6 @@ ActiveRecord::Schema.define(version: 2019_11_17_104106) do
     t.decimal "totalprice"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "stocks", force: :cascade do |t|
-    t.integer "quantity"
-    t.bigint "merchandises_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["merchandises_id"], name: "index_stocks_on_merchandises_id"
   end
 
   create_table "subplans", force: :cascade do |t|
@@ -130,12 +140,15 @@ ActiveRecord::Schema.define(version: 2019_11_17_104106) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "users", column: "users_id"
+  add_foreign_key "creditcards", "users", column: "users_id"
   add_foreign_key "merchorders", "merchandises", column: "merchandises_id"
   add_foreign_key "merchorders", "orders", column: "orders_id"
   add_foreign_key "merchpayments", "merchorders", column: "merchorders_id"
   add_foreign_key "merchpayments", "users", column: "users_id"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
+  add_foreign_key "movieswatcheds", "users", column: "users_id"
   add_foreign_key "subscriptionpayments", "subplans", column: "subplans_id"
   add_foreign_key "subscriptionpayments", "users", column: "users_id"
 end
