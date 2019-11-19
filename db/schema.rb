@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_210826) do
+ActiveRecord::Schema.define(version: 2019_11_19_004924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,19 +110,12 @@ ActiveRecord::Schema.define(version: 2019_11_18_210826) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "subplans", force: :cascade do |t|
-    t.string "plantype"
-    t.boolean "recurring"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "subscriptionpayments", force: :cascade do |t|
     t.bigint "users_id", null: false
-    t.bigint "subplans_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["subplans_id"], name: "index_subscriptionpayments_on_subplans_id"
+    t.string "subscription_level"
+    t.decimal "price"
     t.index ["users_id"], name: "index_subscriptionpayments_on_users_id"
   end
 
@@ -149,6 +142,5 @@ ActiveRecord::Schema.define(version: 2019_11_18_210826) do
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
   add_foreign_key "movieswatcheds", "users", column: "users_id"
-  add_foreign_key "subscriptionpayments", "subplans", column: "subplans_id"
   add_foreign_key "subscriptionpayments", "users", column: "users_id"
 end

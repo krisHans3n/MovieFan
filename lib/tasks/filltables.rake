@@ -10,18 +10,13 @@ namespace :filltables do
     Merchandise.destroy_all
     
     #ActiveRecord::Base.connection.execute("SET session_replication_role = 'replica';")
-
     #   CSV.foreach("lib/assets/csv/genres.csv", :headers=>true) do |row|
-  
     #     puts row.inspect
     #     Genre.create!(
     #       genre: row[0],
-          
     #     )
     #   end
-  
     # p "Basic genre list matching was added"
-  
 
     CSV.foreach("lib/assets/csv/country_centroids.csv", :headers=>true) do |row|
       puts row.inspect
@@ -30,7 +25,6 @@ namespace :filltables do
         Lat: row[1],
         Long: row[2],
         Country: row[3],
-        
       )
     end
 
@@ -48,11 +42,8 @@ namespace :filltables do
     p "movie item names added"
 
   #end
-
-
     # statustype = ["shipped", "pending"]
     # total = [5.99, 6.99, 10, 3.99, 7.98, 30, 20, 13.98, 11.98, 50, 23.96]
-
 
     # @order = Orders.all 
     # @order.each do |o|
@@ -134,13 +125,59 @@ namespace :filltables do
   end 
 
 
+  #creating fake users 
   task seed_two: :environment do
 
+    Subscriptionpayment.destroy_all
+    User.destroy_all
+    10.times do |i|
+      User.create!(
+        email: Faker::Internet.email,
+        password: Faker::Internet.password, 
+        #reset_password_token: ,
+        #reset_password_sent_at: ,
+        #remember_created_at:,
+        f_name: Faker::Name.first_name,
+        l_name:  Faker::Name.last_name,
+      )
+    end
+    p "users added"
 
-    
+    #associating users with subscription plans
+    @subtype = {"basic"=> 4.99, "premium" => 9.99}
+
+    @users = User.all 
+    @users.each do |sub|
+
+      puts sub.inspect
+      thekey = @subtype.keys.sample
+
+      Subscriptionpayment.create!(
+        users_id: sub.id, 
+        subscription_level: thekey, 
+        price: @subtype[thekey],
+      )
+    end
+
   end
 
+  #associating users with movies theyve watched // many -> many rel
+  task seed_three: :environment do
+    Movieswatched.destroy_all  
+    @movie = Movie.select(:id)
+    @users_watched = User.select(:id)
 
+    20.times do |watch|
+    Movieswatched.create!(
+      movies_id: 
+      user_id:
+    )
+  end
+
+    ###select random movies that each user has watched // 
+    ###no more than 1500 rows
+
+  end
 
 
     #  #array for merch matches
@@ -161,6 +198,7 @@ namespace :filltables do
     #  end
     # end
 
+    #this loop breaks
     # #array for country matches
     # @csvarray2.each do |csv|
     #   @iv = csv.to_s
@@ -184,7 +222,7 @@ namespace :filltables do
 
     #ActiveRecord::Base.connection.execute("SET session_replication_role = 'origin';")
 
-    task old_but_gold: :environment do
+    task when_in_doubt: :environment do
 
 
     movie = Movie.select(:id, :productioncountry, :Title)

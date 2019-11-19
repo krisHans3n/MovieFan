@@ -1,5 +1,5 @@
 module MovieswatchedsHelper
-before_action :require_login
+#before_action :require_login
 
 def update 
     @movie = Movie.find(params[:moviewatched])

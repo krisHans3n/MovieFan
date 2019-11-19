@@ -9,9 +9,7 @@ Rails.application.routes.draw do
   resources :merchpayments
   devise_for :users
   resources :movieswatcheds
-  resources :subplans
   resources :merchorders
-  resources :stocks
   resources :merchandises
   resources :orders
   resources :homepages
