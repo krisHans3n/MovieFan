@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    before_action :authenticate_user!
+    #before_action :authenticate_user! #unblock this after changes made
 
     def cart_order
         if session[:orders_id]

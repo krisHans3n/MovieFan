@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  # devise_for :users, controllers: {
-  #   sessions: 'users/sessions'
-  # }
-
+  #  devise_for :users, controllers: {
+  #    sessions: 'users/sessions'
+  #  }
+  devise_for :users
   resources :addresses
   resources :creditcards
   resources :subscriptionpayments
   resources :merchpayments
-  devise_for :users
   resources :movieswatcheds
   resources :merchorders
   resources :merchandises
@@ -19,6 +18,7 @@ Rails.application.routes.draw do
 #root 'users/index'
   root 'movies#index'
 get 'welcome/index'
+get 'genre/index'
 get 'merchandises/index'
 get 'merchorders/index'
 get 'orders/index'

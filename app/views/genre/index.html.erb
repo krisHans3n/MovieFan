@@ -1,0 +1,7 @@
+<% @genrelist.each do |mov|%>
+<li><%= mov.Title %></li>
+<% hold = mov.Genre %>
+
+<%= mov.keywords %>
+<%= link_to 'Show', mov %>
+<%end%>

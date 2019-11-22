@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
   def index
 
 
-    @movies = Movie.all
+    #@movies = Movie.all
 
 
     @country = Country.all
@@ -87,6 +87,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:Title, :Director, :Duration, :Genre, :Year, :imdbscore, :search, :genresearch)
+      params.require(:movie).permit(:Title, :Director, :Duration, :Genre, :Year, :imdbscore)
     end
 end

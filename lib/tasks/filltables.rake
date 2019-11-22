@@ -164,15 +164,19 @@ namespace :filltables do
   #associating users with movies theyve watched // many -> many rel
   task seed_three: :environment do
     Movieswatched.destroy_all  
-    @movie = Movie.select(:id)
+    #@movie = Movie.select(:id)
     @users_watched = User.select(:id)
 
-    20.times do |watch|
-    Movieswatched.create!(
-      movies_id: 
-      user_id:
+    @users_watched.each do |u|
+
+    10.times do |watch|
+    mw = Movieswatched.create!(
+      movies_id: Movie.select(:id).sample,
+      users_id: u.id,
     )
+    mw.save
   end
+end
 
     ###select random movies that each user has watched // 
     ###no more than 1500 rows
@@ -198,7 +202,7 @@ namespace :filltables do
     #  end
     # end
 
-    #this loop breaks
+    #this loop breaks but used a simpler solution higher up
     # #array for country matches
     # @csvarray2.each do |csv|
     #   @iv = csv.to_s

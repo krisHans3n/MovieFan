@@ -32,25 +32,18 @@ L.geoJSON(centre, {
 <% end %>
 
 
-<% @flist.each do |mov|%>
+<% @flist.each do |mov|%> 
 <li><%= link_to mov.Title, movies_path(mov) %></li>
 <% hold = mov.Genre %>
-<% h = hold.split(/[\|]/) %>
-
-<% h.each do |genres|%>
-<%
-=begin%>
- this wont work/ need to figure out how to nest the genre search link 
-without adding extra 3000 rows 
-<%
-=end%>
-<%= link_to genres, movies_path(genres) %>
-<% end %>
+<% @h = hold.split(/[\|]/) %>
+<% @h.each do |genres|%>
+<%= link_to genres, genre_index_path(:genresearch => genres.to_s) %>
+<% end %> 
 <%= mov.imdbscore %>
 <%= mov.keywords %>
 <%= link_to 'Show', mov %>
-
 <%end%>
+
 
 <p id="notice"><%= notice %></p>
 
