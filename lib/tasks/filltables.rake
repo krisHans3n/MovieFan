@@ -9,14 +9,7 @@ namespace :filltables do
     #Genre.destroy_all
     Merchandise.destroy_all
     
-    #ActiveRecord::Base.connection.execute("SET session_replication_role = 'replica';")
-    #   CSV.foreach("lib/assets/csv/genres.csv", :headers=>true) do |row|
-    #     puts row.inspect
-    #     Genre.create!(
-    #       genre: row[0],
-    #     )
-    #   end
-    # p "Basic genre list matching was added"
+    
 
     CSV.foreach("lib/assets/csv/country_centroids.csv", :headers=>true) do |row|
       puts row.inspect
@@ -40,37 +33,6 @@ namespace :filltables do
       )
     end
     p "movie item names added"
-
-  #end
-    # statustype = ["shipped", "pending"]
-    # total = [5.99, 6.99, 10, 3.99, 7.98, 30, 20, 13.98, 11.98, 50, 23.96]
-
-    # @order = Orders.all 
-    # @order.each do |o|
-    #   status: statustype.sample
-
-    # end
-# @merchidtitle = Hash.new 
-# @countryidnames = Hash.new 
-
-# @merch = Merchandise.all
-# ct = 0
-# @merch.each do |merch|
-#   puts merch.id, merch.name 
-#   @merchidtitle[merch.name] = merch.id
-#   #puts @merchidtitle.inspect
-#   ct += 1
-#   puts "merch counter#{ct}"
-# end 
-
-# @ctrys = Country.all 
-# @ctrys.each do |c|
-#   puts c.inspect
-#   ctry = c.Country
-#   @countryidnames[ctry] = c.id
-# end
-
-#task seed_two: :environment do
 
 @csvarray1 = []
 @csvarray2 = []
@@ -128,15 +90,15 @@ namespace :filltables do
   #creating fake users 
   task seed_two: :environment do
 
-    Subscriptionpayment.destroy_all
+    Movieswatched.destroy_all
     User.destroy_all
+    Subscriptionpayment.destroy_all
+    Creditcard.destroy_all
+    Address.destroy_all
     10.times do |i|
       User.create!(
         email: Faker::Internet.email,
-        password: Faker::Internet.password, 
-        #reset_password_token: ,
-        #reset_password_sent_at: ,
-        #remember_created_at:,
+        password_digest: Faker::Internet.password(min_length: 6, max_length: 12), 
         f_name: Faker::Name.first_name,
         l_name:  Faker::Name.last_name,
       )
@@ -145,46 +107,136 @@ namespace :filltables do
 
     #associating users with subscription plans
     @subtype = {"basic"=> 4.99, "premium" => 9.99}
+    year = [2020, 2021, 2022, 2023]
+    companies = ["american Express", "mastercard", "visa"]
 
     @users = User.all 
-    @users.each do |sub|
+    @users.each do |user|
 
       puts sub.inspect
       thekey = @subtype.keys.sample
 
       Subscriptionpayment.create!(
-        users_id: sub.id, 
+        users_id: user.id, 
         subscription_level: thekey, 
         price: @subtype[thekey],
       )
-    end
+        Creditcard.create!(
+        users_id: user.id,
+        number: Faker::Number.number(12),
+        nameoncard: user.f_name + " " + user.l_name,
+        expdate: year.sample.to_s + "/" + Faker::Number.between(1,12).to_s,
+        organisationtype: companies.sample
+      )
+      Address.create!(
+        users_id: user.id,
+        street: Faker::Address.street_address,
+        city: Faker::Address.city,
+        postcode: Faker::Address.postcode,
+      )
 
+    end
   end
 
-  #associating users with movies theyve watched // many -> many rel
-  task seed_three: :environment do
-    Movieswatched.destroy_all  
-    #@movie = Movie.select(:id)
-    @users_watched = User.select(:id)
 
-    @users_watched.each do |u|
+    task seed_three: :environment do
+      
 
-    10.times do |watch|
-    mw = Movieswatched.create!(
-      movies_id: Movie.select(:id).sample,
-      users_id: u.id,
-    )
-    mw.save
   end
 end
 
-    ###select random movies that each user has watched // 
-    ###no more than 1500 rows
+#
+#
+#
+#
+#
+#where code goes to die
 
-  end
+#end
+    # statustype = ["shipped", "pending"]
+    # total = [5.99, 6.99, 10, 3.99, 7.98, 30, 20, 13.98, 11.98, 50, 23.96]
+
+    # @order = Orders.all 
+    # @order.each do |o|
+    #   status: statustype.sample
+
+    # end
+# @merchidtitle = Hash.new 
+# @countryidnames = Hash.new 
+
+# @merch = Merchandise.all
+# ct = 0
+# @merch.each do |merch|
+#   puts merch.id, merch.name 
+#   @merchidtitle[merch.name] = merch.id
+#   #puts @merchidtitle.inspect
+#   ct += 1
+#   puts "merch counter#{ct}"
+# end 
+
+# @ctrys = Country.all 
+# @ctrys.each do |c|
+#   puts c.inspect
+#   ctry = c.Country
+#   @countryidnames[ctry] = c.id
+# end
+
+#task seed_two: :environment do
+
+   
+
+    #ActiveRecord::Base.connection.execute("SET session_replication_role = 'origin';")
+
+#     task when_in_doubt: :environment do
 
 
-    #  #array for merch matches
+#     movie = Movie.select(:id, :productioncountry, :Title)
+#     movie.each do |m|        
+#       puts m.inspect
+
+#       v = m.Title
+#       @ttle = "%" + v.gsub("'", "''").gsub(/\A\p{Space}*|\p{Space}*\z/, '') + "%"  
+#       puts @ttle
+
+#       if m.productioncountry == nil || m.productioncountry == 'New Line' || m.productioncountry == 'Official site'
+#       sql = <<-SQL 
+#       UPDATE movies SET countries_id = null WHERE movies.id = #{m.id}; 
+#       SQL
+#       ActiveRecord::Base.connection.execute(sql)
+#       elsif m.productioncountry == 'Soviet Union'
+#         relid1 = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = 'Russia'")
+#         sql = <<-SQL 
+#         UPDATE movies SET countries_id = #{relid1[0].id} WHERE movies.id = #{m.id}; 
+#         SQL
+#         ActiveRecord::Base.connection.execute(sql)
+#       elsif m.productioncountry == 'West Germany'
+#         relid2 = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = 'Germany'")
+
+#         sql = <<-SQL 
+#         UPDATE movies SET countries_id = #{relid2[0].id} WHERE movies.id = #{m.id}; 
+#         SQL
+#         ActiveRecord::Base.connection.execute(sql)
+
+#       else
+#       ctrytableid = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = '#{m.productioncountry}'")
+#       puts ctrytableid[0].id.inspect
+
+#       titlematch = Merchandise.find_by_sql("SELECT id FROM merchandises WHERE name LIKE '#{@ttle}' ")
+#       puts titlematch[0].id.inspect
+      
+#       sql = <<-SQL 
+#       UPDATE movies SET countries_id = #{ctrytableid[0].id}, merchandises_id = #{titlematch[0].id}
+#       WHERE movies.id = #{m.id}; 
+#       SQL
+#       ActiveRecord::Base.connection.execute(sql)
+#     end
+#   end
+# end
+
+# end
+
+
+ #  #array for merch matches
     #  @country_order = []
     #  @merch_order = []
     # @csvarray1.each do |csv| #this caused the loop to go once
@@ -221,60 +273,6 @@ end
     #   count += 1
     #  end
     # end
-
-
-
-    #ActiveRecord::Base.connection.execute("SET session_replication_role = 'origin';")
-
-    task when_in_doubt: :environment do
-
-
-    movie = Movie.select(:id, :productioncountry, :Title)
-    movie.each do |m|        
-      puts m.inspect
-
-      v = m.Title
-      @ttle = "%" + v.gsub("'", "''").gsub(/\A\p{Space}*|\p{Space}*\z/, '') + "%"  
-      puts @ttle
-
-      if m.productioncountry == nil || m.productioncountry == 'New Line' || m.productioncountry == 'Official site'
-      sql = <<-SQL 
-      UPDATE movies SET countries_id = null WHERE movies.id = #{m.id}; 
-      SQL
-      ActiveRecord::Base.connection.execute(sql)
-      elsif m.productioncountry == 'Soviet Union'
-        relid1 = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = 'Russia'")
-        sql = <<-SQL 
-        UPDATE movies SET countries_id = #{relid1[0].id} WHERE movies.id = #{m.id}; 
-        SQL
-        ActiveRecord::Base.connection.execute(sql)
-      elsif m.productioncountry == 'West Germany'
-        relid2 = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = 'Germany'")
-
-        sql = <<-SQL 
-        UPDATE movies SET countries_id = #{relid2[0].id} WHERE movies.id = #{m.id}; 
-        SQL
-        ActiveRecord::Base.connection.execute(sql)
-
-      else
-      ctrytableid = Country.find_by_sql("SELECT id FROM countries WHERE \"Country\" = '#{m.productioncountry}'")
-      puts ctrytableid[0].id.inspect
-
-      titlematch = Merchandise.find_by_sql("SELECT id FROM merchandises WHERE name LIKE '#{@ttle}' ")
-      puts titlematch[0].id.inspect
-      
-      sql = <<-SQL 
-      UPDATE movies SET countries_id = #{ctrytableid[0].id}, merchandises_id = #{titlematch[0].id}
-      WHERE movies.id = #{m.id}; 
-      SQL
-      ActiveRecord::Base.connection.execute(sql)
-    end
-  end
-end
-
-
-end
-
 
 
 

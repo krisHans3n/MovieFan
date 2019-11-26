@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h3>screen to be added</h3>
+
 <p>
   <strong>Title:</strong>
   <%= @movie.Title %>
@@ -30,5 +32,10 @@
   <%= @movie.imdbscore %>
 </p>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
 <%= link_to 'Back', movies_path %>
+<%= link_to 'Seen', new_movieswatched_path(:seenit => @movie.id) %>
+<%= link_to 'buy the poster!', merchandises_path %>
+
+
+
+

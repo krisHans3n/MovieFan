@@ -1,7 +1,12 @@
 <% @genrelist.each do |mov|%>
 <li><%= mov.Title %></li>
 <% hold = mov.Genre %>
-
+<% hold = mov.Genre %>
+<% @h = hold.split(/[\|]/) %>
+<% @h.each do |genres|%>
+<%= link_to genres, genre_index_path(:genresearch => genres.to_s) %>
+<% end %> 
 <%= mov.keywords %>
 <%= link_to 'Show', mov %>
+
 <%end%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_004924) do
+ActiveRecord::Schema.define(version: 2019_11_25_220244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,15 @@ ActiveRecord::Schema.define(version: 2019_11_19_004924) do
     t.string "street"
     t.string "city"
     t.string "postcode"
-    t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "users_id"
     t.index ["users_id"], name: "index_addresses_on_users_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -39,9 +44,9 @@ ActiveRecord::Schema.define(version: 2019_11_19_004924) do
     t.string "expdate"
     t.string "nameoncard"
     t.string "organisationtype"
-    t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "users_id"
     t.index ["users_id"], name: "index_creditcards_on_users_id"
   end
 
@@ -57,20 +62,19 @@ ActiveRecord::Schema.define(version: 2019_11_19_004924) do
   create_table "merchorders", force: :cascade do |t|
     t.integer "quantity"
     t.bigint "merchandises_id", null: false
-    t.bigint "orders_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "users_id"
     t.index ["merchandises_id"], name: "index_merchorders_on_merchandises_id"
-    t.index ["orders_id"], name: "index_merchorders_on_orders_id"
+    t.index ["users_id"], name: "index_merchorders_on_users_id"
   end
 
   create_table "merchpayments", force: :cascade do |t|
-    t.bigint "users_id", null: false
     t.bigint "merchorders_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "total"
     t.index ["merchorders_id"], name: "index_merchpayments_on_merchorders_id"
-    t.index ["users_id"], name: "index_merchpayments_on_users_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -111,36 +115,28 @@ ActiveRecord::Schema.define(version: 2019_11_19_004924) do
   end
 
   create_table "subscriptionpayments", force: :cascade do |t|
-    t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "subscription_level"
     t.decimal "price"
-    t.index ["users_id"], name: "index_subscriptionpayments_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.string "email"
+    t.string "password_digest"
     t.string "f_name"
     t.string "l_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "addresses", "users", column: "users_id"
   add_foreign_key "creditcards", "users", column: "users_id"
   add_foreign_key "merchorders", "merchandises", column: "merchandises_id"
-  add_foreign_key "merchorders", "orders", column: "orders_id"
+  add_foreign_key "merchorders", "users", column: "users_id"
   add_foreign_key "merchpayments", "merchorders", column: "merchorders_id"
-  add_foreign_key "merchpayments", "users", column: "users_id"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
   add_foreign_key "movieswatcheds", "users", column: "users_id"
-  add_foreign_key "subscriptionpayments", "users", column: "users_id"
 end

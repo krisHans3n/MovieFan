@@ -1,12 +1,9 @@
 class ApplicationController < ActionController::Base
-    #before_action :authenticate_user! #unblock this after changes made
+    include SessionsHelper
+    before_action :logged_in?
 
-    def cart_order
-        if session[:orders_id]
-            Order.find(session[:orders_id])
-        else 
-            Order.new
-        end
+
+    def redirect_if_not_found
     end
     
 end

@@ -3,7 +3,6 @@ class CreateMerchorders < ActiveRecord::Migration[6.0]
     create_table :merchorders do |t|
       t.integer :quantity
       t.references :merchandises, null: false, foreign_key: true
-      t.references :orders, null: false, foreign_key: true
 
       t.timestamps
     end

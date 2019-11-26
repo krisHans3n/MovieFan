@@ -6,28 +6,21 @@ class MoviesController < ApplicationController
   def index
 
 
-    #@movies = Movie.all
-
-
     @country = Country.all
     @centroids = []
     @country.each do |r|
       @template = { "type": "Feature", "properties": {"name": r.Country}, "geometry": {"type": "Point", "coordinates": [r.Long, r.Lat]} }
-
       @centroids << @template 
     end
 
-
-    #if params[:search]
-    @flist = Movie.search_by_title(params[:search])
-
-
-  end
+    @flist = Movie.search_by_title(params[:search]) 
+  end 
 
   
   # GET /movies/1
   # GET /movies/1.json
   def show
+    @movwatched = Movieswatched.all 
   end
 
   # GET /movies/new
@@ -87,6 +80,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:Title, :Director, :Duration, :Genre, :Year, :imdbscore)
+      params.require(:movie).permit(:Title, :Director, :Duration, :Genre, :Year, :imdbscore, :seenit)
     end
 end

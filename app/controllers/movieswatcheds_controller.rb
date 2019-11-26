@@ -7,6 +7,7 @@ class MovieswatchedsController < ApplicationController
     @movieswatcheds = Movieswatched.all
   end
 
+
   # GET /movieswatcheds/1
   # GET /movieswatcheds/1.json
   def show
@@ -14,7 +15,14 @@ class MovieswatchedsController < ApplicationController
 
   # GET /movieswatcheds/new
   def new
-    @movieswatched = Movieswatched.new
+
+    @movwatched = Movieswatched.new
+    #movieswatched = @movwatched.create(movies_id: params[:seenit], users_id: "83")
+    @movwatched.movies_id = params[:seenit]
+    @movwatched.users_id = "3" #will switch with session id method
+    @movwatched.save
+    redirect_to movies_path
+
   end
 
   # GET /movieswatcheds/1/edit

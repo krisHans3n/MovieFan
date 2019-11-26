@@ -20,8 +20,6 @@ L.geoJSON(centre, {
         return L.circleMarker(latlng);
 	}
 }).addTo(mymap);
-
-
 });
 
 </script>
@@ -31,7 +29,6 @@ L.geoJSON(centre, {
 <%= submit_tag ("Search")%>
 <% end %>
 
-
 <% @flist.each do |mov|%> 
 <li><%= link_to mov.Title, movies_path(mov) %></li>
 <% hold = mov.Genre %>
@@ -39,49 +36,28 @@ L.geoJSON(centre, {
 <% @h.each do |genres|%>
 <%= link_to genres, genre_index_path(:genresearch => genres.to_s) %>
 <% end %> 
-<%= mov.imdbscore %>
-<%= mov.keywords %>
+<%=  mov.imdbscore %> 
+<%
+=begin%>
+ <% hold2 = mov.keywords %>
+<% if hold2 == true %>
+<% @h2 = hold2.split(/[\|]/) %>
+<% else  %>
+<% @h2 = "" %>
+<% end %>
+<% @h2.each do |keywords|%>
+<%= link_to keywords, movies_path(:keywordsearch => keywords.to_s) %>
+<% end %>  
+<%
+=end%>
+
 <%= link_to 'Show', mov %>
+
+
 <%end%>
 
 
 <p id="notice"><%= notice %></p>
-
-
-<%
-=begin%>
- <table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Director</th>
-      <th>Duration</th>
-      <th>Genre</th>
-      <th>Year</th>
-      <th>Imdbscore</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.Title %></td>
-        <td><%= movie.Director %></td>
-        <td><%= movie.Duration %></td>
-        <td><%= movie.Genre %></td>
-        <td><%= movie.Year %></td>
-        <td><%= movie.imdbscore %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Watch', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table> 
-<%
-=end%>
 
 <br>
 
