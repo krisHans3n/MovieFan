@@ -6,7 +6,7 @@ class MovieswatchedsController < ApplicationController
   def index
     @movieswatcheds = Movieswatched.all
   end
-
+#test for branching
 
   # GET /movieswatcheds/1
   # GET /movieswatcheds/1.json
@@ -19,7 +19,7 @@ class MovieswatchedsController < ApplicationController
     @movwatched = Movieswatched.new
     #movieswatched = @movwatched.create(movies_id: params[:seenit], users_id: "83")
     @movwatched.movies_id = params[:seenit]
-    @movwatched.users_id = "3" #will switch with session id method
+    @movwatched.users_id = "6" #will switch with session id method
     @movwatched.save
     redirect_to movies_path
 

@@ -1,4 +1,5 @@
 require 'csv'
+require 'bcrypt'
 
 namespace :filltables do
 
@@ -88,6 +89,7 @@ namespace :filltables do
 
 
   #creating fake users 
+  verysecure = ["dogs1234", "hye8f7w88fg", "nuc87384v3", "nfu28c8c", "ciubwrivb83bv", "v73h84gv834v", "bibc834bv"]
   task seed_two: :environment do
 
     Movieswatched.destroy_all
@@ -98,7 +100,7 @@ namespace :filltables do
     10.times do |i|
       User.create!(
         email: Faker::Internet.email,
-        password_digest: Faker::Internet.password(min_length: 6, max_length: 12), 
+        password_digest: BCrypt::Password.create(verysecure.sample), 
         f_name: Faker::Name.first_name,
         l_name:  Faker::Name.last_name,
       )
