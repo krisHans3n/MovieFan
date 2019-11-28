@@ -2,7 +2,7 @@ class LineitemsController < ApplicationController
   include CurrentCart
   before_action :set_lineitem, only: [:show, :edit, :update, :destroy]
 
-  before_action :set_cart, only [:create]
+  before_action :set_cart, only: [:create]
   # GET /lineitems
   # GET /lineitems.json
   def index
