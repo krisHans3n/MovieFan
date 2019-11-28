@@ -4,6 +4,7 @@ class User < ApplicationRecord
     has_one :address
     has_one :creditcard
     has_one :subscriptionpayment
+    has_many :merchandises
 
     validates :f_name,  presence: true, length:{maximum: 50 }
     VALID_EMAIL_REGEX =/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

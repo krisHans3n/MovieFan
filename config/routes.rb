@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  resources :lineitems
+  resources :carts
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
   resources :users
-  resources :carts
   resources :addresses
   resources :creditcards
   resources :subscriptionpayments
