@@ -6,7 +6,6 @@ class MovieswatchedsController < ApplicationController
   def index
     @movieswatcheds = Movieswatched.all
   end
-#test for branching
 
   # GET /movieswatcheds/1
   # GET /movieswatcheds/1.json
