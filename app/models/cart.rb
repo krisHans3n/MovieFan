@@ -5,7 +5,7 @@ class Cart < ApplicationRecord
     def add_merch(merch)
         currentmerch = lineitems.find_by(merchandise_id: merch.id)
 
-        if currentmerch
+        if currentmerch == true
             currentmerch.increment(:quantity)
         else
             currentmerch = lineitems.build(merchandise_id: merch.id)

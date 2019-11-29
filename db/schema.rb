@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_014401) do
+ActiveRecord::Schema.define(version: 2019_11_29_020343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,13 +51,13 @@ ActiveRecord::Schema.define(version: 2019_11_28_014401) do
   end
 
   create_table "lineitems", force: :cascade do |t|
-    t.bigint "merchandises_id", null: false
-    t.bigint "carts_id", null: false
+    t.bigint "merchandise_id", null: false
+    t.bigint "cart_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "quantity", default: 1
-    t.index ["carts_id"], name: "index_lineitems_on_carts_id"
-    t.index ["merchandises_id"], name: "index_lineitems_on_merchandises_id"
+    t.index ["cart_id"], name: "index_lineitems_on_cart_id"
+    t.index ["merchandise_id"], name: "index_lineitems_on_merchandise_id"
   end
 
   create_table "merchandises", force: :cascade do |t|
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 2019_11_28_014401) do
 
   add_foreign_key "addresses", "users", column: "users_id"
   add_foreign_key "creditcards", "users", column: "users_id"
-  add_foreign_key "lineitems", "carts", column: "carts_id"
-  add_foreign_key "lineitems", "merchandises", column: "merchandises_id"
+  add_foreign_key "lineitems", "carts"
+  add_foreign_key "lineitems", "merchandises"
   add_foreign_key "merchorders", "merchandises", column: "merchandises_id"
   add_foreign_key "merchorders", "users", column: "users_id"
   add_foreign_key "merchpayments", "merchorders", column: "merchorders_id"

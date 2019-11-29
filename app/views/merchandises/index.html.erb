@@ -22,11 +22,6 @@
         <td><%= link_to 'Show', merchandise %></td>
         <td><%= link_to 'Edit', edit_merchandise_path(merchandise) %></td>
         <td><%= link_to 'Destroy', merchandise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%= form_for @merch_order do |f| %>
-           <%= f.hidden_field :merchandises_id, value: merchandise.id %>
-           <%= f.number_field :quantity %>
-           <%= f.submit "Add to cart" %>
-           <% end %></p>
       </tr>
     <% end %>
   </tbody>

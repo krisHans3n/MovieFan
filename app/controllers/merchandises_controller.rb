@@ -7,6 +7,7 @@ class MerchandisesController < ApplicationController
   def index
     @merchandises = Merchandise.all
     @merch_order = Merchorder.new
+    #@selectedposter = Merchandise.checkposter(params[:checkposter])
   end
 
   # GET /merchandises/1

@@ -1,7 +1,7 @@
 class ItemsInCart < ActiveRecord::Migration[6.0]
   def up 
     Cart.all.each do |cart|
-      sum = cart.Lineitems.group(:merchandises_id).sum(:quantity)
+      sum = cart.lineitems.group(:merchandises_id).sum(:quantity)
       sums.each do |merchandise_id, quantity|
         if quantity > 1
           cart.lineitems.where(merchandises_id: merchandise_id).delete_all 

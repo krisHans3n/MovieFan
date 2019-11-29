@@ -5,6 +5,10 @@ class Merchandise < ApplicationRecord
     belongs_to :user, optional: true 
     has_many :lineitems
 
+    def self.checkposter(checkposter)
+        Merchandise.select(id: checkposter)
+    end
+
     private
 
     def not_referenced_by_line

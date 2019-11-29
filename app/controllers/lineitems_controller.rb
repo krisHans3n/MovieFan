@@ -26,7 +26,8 @@ class LineitemsController < ApplicationController
   # POST /lineitems
   # POST /lineitems.json
   def create
-    @lineitem = Lineitem.new(lineitem_params)
+    poster = Merchandise.find(params[:merchandise_id])
+    @lineitem = @cart.add_merch(poster)
 
     respond_to do |format|
       if @lineitem.save
@@ -71,6 +72,6 @@ class LineitemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lineitem_params
-      params.require(:lineitem).permit(:merchandises_id, :carts_id)
+      params.require(:lineitem).permit(:merchandise_id)
     end
 end
