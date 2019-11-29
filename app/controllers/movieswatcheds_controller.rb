@@ -19,8 +19,8 @@ class MovieswatchedsController < ApplicationController
 
     @movwatched = Movieswatched.new
     #movieswatched = @movwatched.create(movies_id: params[:seenit], users_id: "83")
-    @movwatched.movies_id = params[:seenit]
-    @movwatched.users_id = session[:user_id]
+    @movwatched.movie_id = params[:seenit]
+    @movwatched.user_id = session[:user_id]
     @movwatched.save
     redirect_to movies_path
 

@@ -1,3 +1,5 @@
+require './lib/recommendation.rb'
+
 class User < ApplicationRecord
     has_many :movieswatcheds
     has_many :movies, through: :movieswatcheds
@@ -14,5 +16,6 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, presence: true, length: { minimum: 6}
 
+    include Recommendation
 
 end

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resource :cart, only: [:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'movies/index'
+  get 'movies/send_genre'
   post 'movieswatcheds/addrecords'
 get 'welcome/index'
 get 'genre/index'

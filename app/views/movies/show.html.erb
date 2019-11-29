@@ -32,8 +32,24 @@
   <%= @movie.imdbscore %>
 </p>
 
+<p>
+  <strong>Age Rating:</strong>
+  <%= @movie.contentrating %>
+</p>
+
+<p>
+  <strong>Feature Actors:</strong>
+  <%= @movie.actor1 %>
+  <%= @movie.actor2 %>
+</p>
+
+<p>
+  <strong>Keyword Description:</strong>
+  <%= @movie.keywords %>
+</p>
+
 <%= link_to 'Back', movies_path %>
-<%= link_to 'Seen', new_movieswatched_path(:seenit => @movie.id) %>
+<%= link_to 'Like', new_movieswatched_path(:seenit => @movie.id) %>
 
 
 

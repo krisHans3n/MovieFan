@@ -12,6 +12,7 @@ class LineitemsController < ApplicationController
   # GET /lineitems/1
   # GET /lineitems/1.json
   def show
+    @postertitle = Merchandise.select(:id).where(@lineitem.merchandise_id.to_s)
   end
 
   # GET /lineitems/new

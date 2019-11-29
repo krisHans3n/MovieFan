@@ -26,13 +26,22 @@
       <a class="nav-link" href="/merchandises">Posters</a>
       <a class="nav-link" href="/lineitems">Line[incomp..]</a>
       <a class="nav-link" href="/carts">Cart[incomp..]</a>
+      <a class="nav-link" href="/users">Profile</a>
 
     </li>
     
   </ul>
     
-    <%=link_to "Log in", login_path %> |
- <%=link_to "Log out", logout_path %>
+<% if current_user %>
+        Hi <%= current_user.f_name %>
+        |
+         <%=link_to "Log out", logout_path %>
+
+      <% else %>
+        <%= link_to 'Log in', login_path %>
+        |
+        <%= link_to 'Sign up', new_user_path %>
+      <% end %>
 
 
 

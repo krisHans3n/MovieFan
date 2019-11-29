@@ -16,11 +16,10 @@ class MoviesController < ApplicationController
     @flist = Movie.search_by_title(params[:search]) 
   end 
 
-  
+
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @movwatched = Movieswatched.all 
   end
 
   # GET /movies/new

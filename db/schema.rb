@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_020343) do
+ActiveRecord::Schema.define(version: 2019_11_29_150044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,12 +109,12 @@ ActiveRecord::Schema.define(version: 2019_11_29_020343) do
   end
 
   create_table "movieswatcheds", force: :cascade do |t|
-    t.bigint "movies_id"
+    t.bigint "movie_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
-    t.index ["movies_id"], name: "index_movieswatcheds_on_movies_id"
-    t.index ["users_id"], name: "index_movieswatcheds_on_users_id"
+    t.bigint "user_id"
+    t.index ["movie_id"], name: "index_movieswatcheds_on_movie_id"
+    t.index ["user_id"], name: "index_movieswatcheds_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -150,5 +150,5 @@ ActiveRecord::Schema.define(version: 2019_11_29_020343) do
   add_foreign_key "merchpayments", "merchorders", column: "merchorders_id"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
-  add_foreign_key "movieswatcheds", "users", column: "users_id"
+  add_foreign_key "movieswatcheds", "users"
 end
