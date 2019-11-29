@@ -1,11 +1,13 @@
 class MerchandisesController < ApplicationController
   before_action :set_merchandise, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?
 
   # GET /merchandises
   # GET /merchandises.json
   def index
     @merchandises = Merchandise.all
     @merch_order = Merchorder.new
+    #@selectedposter = Merchandise.checkposter(params[:checkposter])
   end
 
   # GET /merchandises/1

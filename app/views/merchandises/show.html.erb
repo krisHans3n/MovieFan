@@ -16,4 +16,4 @@
 </p>
 
 <%= link_to 'Edit', edit_merchandise_path(@merchandise) %> |
-<%= link_to 'Back', merchandises_path %>
+<%= button_to 'Add to cart', lineitems_path(merchandise_id: @merchandise.id), class: 'button is-warning add-to-cart' %>
