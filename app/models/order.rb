@@ -1,4 +1,3 @@
 class Order < ApplicationRecord
-    has_many :merchorders
-
+  belongs_to :accounts
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :lineitems
-  resources :carts
+  resources :orders
+  resources :accounts
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
@@ -11,9 +11,7 @@ Rails.application.routes.draw do
   resources :subscriptionpayments
   resources :merchpayments
   resources :movieswatcheds
-  resources :merchorders
   resources :merchandises
-  resources :orders
   resources :homepages
   resources :movies
   resource :cart, only: [:show]

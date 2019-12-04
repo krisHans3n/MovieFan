@@ -1,2 +1,0 @@
-module MerchordersHelper
-end

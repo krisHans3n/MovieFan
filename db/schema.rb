@@ -10,24 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_150044) do
+ActiveRecord::Schema.define(version: 2019_12_04_133216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.bigint "users_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_id"], name: "index_accounts_on_users_id"
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
     t.string "city"
     t.string "postcode"
+    t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
     t.index ["users_id"], name: "index_addresses_on_users_id"
-  end
-
-  create_table "carts", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -44,20 +46,10 @@ ActiveRecord::Schema.define(version: 2019_11_29_150044) do
     t.string "expdate"
     t.string "nameoncard"
     t.string "organisationtype"
+    t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
     t.index ["users_id"], name: "index_creditcards_on_users_id"
-  end
-
-  create_table "lineitems", force: :cascade do |t|
-    t.bigint "merchandise_id", null: false
-    t.bigint "cart_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "quantity", default: 1
-    t.index ["cart_id"], name: "index_lineitems_on_cart_id"
-    t.index ["merchandise_id"], name: "index_lineitems_on_merchandise_id"
   end
 
   create_table "merchandises", force: :cascade do |t|
@@ -69,24 +61,6 @@ ActiveRecord::Schema.define(version: 2019_11_29_150044) do
     t.integer "stocknumber"
   end
 
-  create_table "merchorders", force: :cascade do |t|
-    t.integer "quantity"
-    t.bigint "merchandises_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
-    t.index ["merchandises_id"], name: "index_merchorders_on_merchandises_id"
-    t.index ["users_id"], name: "index_merchorders_on_users_id"
-  end
-
-  create_table "merchpayments", force: :cascade do |t|
-    t.bigint "merchorders_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.decimal "total"
-    t.index ["merchorders_id"], name: "index_merchpayments_on_merchorders_id"
-  end
-
   create_table "movies", force: :cascade do |t|
     t.string "Title"
     t.string "Director"
@@ -96,7 +70,6 @@ ActiveRecord::Schema.define(version: 2019_11_29_150044) do
     t.decimal "imdbscore"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "productioncountry"
     t.bigint "countries_id"
     t.string "actor1"
     t.string "actor2"
@@ -104,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_150044) do
     t.string "language"
     t.string "contentrating"
     t.bigint "merchandises_id"
+    t.string "productioncountry"
     t.index ["countries_id"], name: "index_movies_on_countries_id"
     t.index ["merchandises_id"], name: "index_movies_on_merchandises_id"
   end
@@ -118,17 +92,10 @@ ActiveRecord::Schema.define(version: 2019_11_29_150044) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "status"
-    t.decimal "totalprice"
+    t.bigint "accounts_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "subscriptionpayments", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "subscription_level"
-    t.decimal "price"
+    t.index ["accounts_id"], name: "index_orders_on_accounts_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -141,14 +108,11 @@ ActiveRecord::Schema.define(version: 2019_11_29_150044) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "accounts", "users", column: "users_id"
   add_foreign_key "addresses", "users", column: "users_id"
   add_foreign_key "creditcards", "users", column: "users_id"
-  add_foreign_key "lineitems", "carts"
-  add_foreign_key "lineitems", "merchandises"
-  add_foreign_key "merchorders", "merchandises", column: "merchandises_id"
-  add_foreign_key "merchorders", "users", column: "users_id"
-  add_foreign_key "merchpayments", "merchorders", column: "merchorders_id"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
   add_foreign_key "movieswatcheds", "users"
+  add_foreign_key "orders", "accounts", column: "accounts_id"
 end
