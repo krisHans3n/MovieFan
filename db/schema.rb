@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_235924) do
+ActiveRecord::Schema.define(version: 2019_12_05_012615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 2019_12_04_235924) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["users_id"], name: "index_addresses_on_users_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -90,6 +95,8 @@ ActiveRecord::Schema.define(version: 2019_12_04_235924) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "quantity"
+    t.bigint "cart_id"
+    t.index ["cart_id"], name: "index_order_items_on_cart_id"
     t.index ["merchandise_id"], name: "index_order_items_on_merchandise_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
@@ -116,6 +123,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_235924) do
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
   add_foreign_key "movieswatcheds", "users"
+  add_foreign_key "order_items", "carts"
   add_foreign_key "order_items", "merchandises"
   add_foreign_key "order_items", "orders"
 end

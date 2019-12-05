@@ -5,10 +5,11 @@ class ApplicationController < ActionController::Base
 
 
     def current_order 
-        if session[:order_id]
-            Order.find(session[:order_id])
-        else
-            Order.new
+        
+        if session[:order_id].nil? 
+            Order.new 
+        else 
+            Order.find(session[:order_id], user: session[:user_id])
         end
 
     end
