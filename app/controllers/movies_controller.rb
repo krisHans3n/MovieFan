@@ -5,12 +5,18 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
 
+    country_list = []
+    country_list = Movie.distinct.pluck(:productioncountry)
 
     @country = Country.all
     @centroids = []
     @country.each do |r|
+      if country_list.include? r.Country
       @template = { "type": "Feature", "properties": {"name": r.Country}, "geometry": {"type": "Point", "coordinates": [r.Long, r.Lat]} }
       @centroids << @template 
+      else  
+        next
+      end
     end
 
     @flist = Movie.search_by_title(params[:search]) 
@@ -72,6 +78,10 @@ class MoviesController < ApplicationController
   end
 
   private
+
+
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])

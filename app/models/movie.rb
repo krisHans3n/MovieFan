@@ -4,9 +4,6 @@ belongs_to :merchandise, optional: true
 has_many :movieswatcheds
 has_many :users, through: :movieswatcheds
 
-def self.searchfunc(parameter)
-    
-end
 
 def self.search_by_title(search)
     if search 

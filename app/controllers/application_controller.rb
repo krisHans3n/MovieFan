@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
         if session[:order_id].nil? 
             Order.new 
         else 
-            Order.find(session[:order_id], user: session[:user_id])
+            Order.find(session[:order_id])
         end
 
     end
