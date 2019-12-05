@@ -69,6 +69,6 @@ class MerchpaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def merchpayment_params
-      params.require(:merchpayment).permit(:users_id, :merchorders_id)
+      params.require(:merchpayment).permit(:users_id, :orders_id)
     end
 end

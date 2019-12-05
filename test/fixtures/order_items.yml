@@ -1,7 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  users: one
+  merchandises: one
+  orders: one
 
 two:
-  users: two
+  merchandises: two
+  orders: two

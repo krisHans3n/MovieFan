@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :order_items
   resources :orders
-  resources :accounts
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'

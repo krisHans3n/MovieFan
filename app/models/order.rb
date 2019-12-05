@@ -1,3 +1,3 @@
 class Order < ApplicationRecord
-  belongs_to :accounts
+  has_many :order_items
 end

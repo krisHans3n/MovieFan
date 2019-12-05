@@ -6,6 +6,7 @@ class MerchandisesController < ApplicationController
   # GET /merchandises.json
   def index
     @merchandises = Merchandise.all
+    @order_item = current_order.order_items.new
   end
 
   # GET /merchandises/1

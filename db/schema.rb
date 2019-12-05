@@ -10,17 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_133216) do
+ActiveRecord::Schema.define(version: 2019_12_04_235924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accounts", force: :cascade do |t|
-    t.bigint "users_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_accounts_on_users_id"
-  end
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -91,11 +84,21 @@ ActiveRecord::Schema.define(version: 2019_12_04_133216) do
     t.index ["user_id"], name: "index_movieswatcheds_on_user_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.bigint "accounts_id", null: false
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "merchandise_id", null: false
+    t.bigint "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["accounts_id"], name: "index_orders_on_accounts_id"
+    t.integer "quantity"
+    t.index ["merchandise_id"], name: "index_order_items_on_merchandise_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
+    t.decimal "total_price"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,11 +111,11 @@ ActiveRecord::Schema.define(version: 2019_12_04_133216) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "accounts", "users", column: "users_id"
   add_foreign_key "addresses", "users", column: "users_id"
   add_foreign_key "creditcards", "users", column: "users_id"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
   add_foreign_key "movieswatcheds", "users"
-  add_foreign_key "orders", "accounts", column: "accounts_id"
+  add_foreign_key "order_items", "merchandises"
+  add_foreign_key "order_items", "orders"
 end

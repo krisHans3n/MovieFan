@@ -2,30 +2,24 @@
 
 <h1>Merchandises</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Details</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
     <% @merchandises.each do |merchandise| %>
-      <tr>
-        <td><%= merchandise.name %></td>
-        <td><%= number_to_currency merchandise.price %></td>
-        
-        <td><%= merchandise.details %></td>
-        <td><%= link_to 'Show', merchandise %></td>
-        <td><%= link_to 'Edit', edit_merchandise_path(merchandise) %></td>
-        <td><%= link_to 'Destroy', merchandise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <p><%= merchandise.name %> |
+        <%= number_to_currency merchandise.price %> |
+        <%= merchandise.details %>
+
+        <%= form_for @order_item do |form| %>
+        <%= form.hidden_field :merchandise_id, value: merchandise.id %>
+        <%= form.number_field :quantity %>
+        <%= form.submit "Add to Cart" %>
+        <% end %></p>
+
+ 
+
+        <%= link_to 'Show', merchandise %>
+        <%= link_to 'Edit', edit_merchandise_path(merchandise) %>
+       <%= link_to 'Destroy', merchandise, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-  </tbody>
-</table>
 
 <br>
 
