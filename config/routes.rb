@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
+  resources :admin 
   resources :users
   resources :addresses
   resources :creditcards
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   resource :cart, only: [:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #get 'carts/show'
+  get 'merchandises/checkout'
   get 'movies/index'
   get 'movies/send_genre'
   post 'movieswatcheds/addrecords'

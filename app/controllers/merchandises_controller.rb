@@ -9,6 +9,9 @@ class MerchandisesController < ApplicationController
     @order_item = current_order.order_items.new
   end
 
+  def checkout 
+  end
+
   # def who_bought 
   #   @merchandise = Merchandise.find(params[:id])
   #   @latest_order = @merchandise.orders.order(:updated_at).last 

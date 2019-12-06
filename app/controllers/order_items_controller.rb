@@ -28,7 +28,8 @@ class OrderItemsController < ApplicationController
     @order = current_order 
     @item = @order.order_items.new(order_item_params)
     @order.save
-    session[:order_id] = @order.id 
+    session[:order_id] = @order.id
+    flash[:notice]= "Item added to your cart" 
     redirect_to merchandises_path
 
   end

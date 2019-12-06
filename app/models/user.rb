@@ -8,6 +8,8 @@ class User < ApplicationRecord
     has_one :subscriptionpayment
     has_many :merchandises
     has_one :account
+    enum role: [:user, :admin]
+    #after_initialize :set_default_role, :if => :new_record?
 
     validates :f_name,  presence: true, length:{maximum: 50 }
     VALID_EMAIL_REGEX =/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

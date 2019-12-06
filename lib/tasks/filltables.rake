@@ -9,6 +9,11 @@ namespace :filltables do
     Country.destroy_all
     #Genre.destroy_all
     Merchandise.destroy_all
+    User.destroy_all 
+
+    user = User.create!( :email => 'admin@admin.com', :password => '123456', :f_name => 'admin', :l_name => 'admin', :role => 'admin' )
+    user.role = 'admin'
+    user.save!
     
     
 
@@ -89,7 +94,6 @@ namespace :filltables do
 
 
   #creating fake users 
-  verysecure = ["dogs1234", "hye8f7w88fg", "nuc87384v3", "nfu28c8c", "ciubwrivb83bv", "v73h84gv834v", "bibc834bv"]
   task seed_two: :environment do
 
     Movieswatched.destroy_all
@@ -100,7 +104,7 @@ namespace :filltables do
     10.times do |i|
       User.create!(
         email: Faker::Internet.email,
-        password_digest: BCrypt::Password.create(verysecure.sample), 
+        password_digest: BCrypt::Password.create('secret'), 
         f_name: Faker::Name.first_name,
         l_name:  Faker::Name.last_name,
       )
