@@ -24,11 +24,12 @@
     <li class="nav-item active">
       <a class="nav-link" href="/movies">Movies</a>
       <a class="nav-link" href="/merchandises">Posters</a>
-      <a class="nav-link" href="/users">Profile</a>
+      <%= link_to "Profile", current_user %>
 
     </li>
-    
   </ul>
+  <ul class="nav pull-right">
+    </ul>
     
 <% if current_user %>
         Hi <%= current_user.f_name %>
