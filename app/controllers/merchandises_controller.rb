@@ -9,6 +9,16 @@ class MerchandisesController < ApplicationController
     @order_item = current_order.order_items.new
   end
 
+  # def who_bought 
+  #   @merchandise = Merchandise.find(params[:id])
+  #   @latest_order = @merchandise.orders.order(:updated_at).last 
+  #   if stale?(@latest_order)
+  #     respond_to do |format|
+  #       format.atom 
+  #     end 
+  #   end 
+  # end
+
   # GET /merchandises/1
   # GET /merchandises/1.json
   def show

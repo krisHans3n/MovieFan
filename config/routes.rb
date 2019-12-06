@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admin' => 'admin#index'
   resources :order_items
   resources :orders
   get '/login', to: 'sessions#new'
