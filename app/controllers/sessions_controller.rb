@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password]) 
       log_in(user)
-      if user.role == 1
-        redirect_to admin
+      if admin_user? 
+        redirect_to admin_url
       else
         redirect_to user
-      end
+      end    
     else
      flash[:notice] = "Invalid email/password combination"
       redirect_to users_path

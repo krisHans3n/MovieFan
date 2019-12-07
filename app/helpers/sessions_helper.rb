@@ -17,7 +17,7 @@ module SessionsHelper
     end
 
     def admin_user?
-        current_user && current_user.role == '1'
+        current_user && current_user.role == "admin"
     end
 
     def log_out
