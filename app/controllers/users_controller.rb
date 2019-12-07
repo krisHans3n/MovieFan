@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :logged_in?, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show]
+  before_action :require_authorization, only: [:index, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -63,6 +64,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def require_authorization
+    redirect_to movies_path unless current_user.role == 'admin' # or whatever you want to check
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

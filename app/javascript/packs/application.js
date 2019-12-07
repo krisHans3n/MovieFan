@@ -4,11 +4,24 @@
 // that code so it'll be compiled.
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import "../src/style.scss";
 
+//import 'bootstrap/dist/js/bootstrap';
+
+require("jquery");
+require("bootstrap");
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+
+var jQuery = require("jquery")
+
+// import jQuery from "jquery";
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+require('bootstrap');
+//require('admin-lte@3.0')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

@@ -1,3 +1,5 @@
+require './lib/recommendation.rb'
+
 class Merchandise < ApplicationRecord
     has_one :stock
     has_one :movie
