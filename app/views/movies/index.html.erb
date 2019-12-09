@@ -1,5 +1,5 @@
 
-<h1>Movies</h1>
+<h1>Movies From Around The World</h1>
 
 <div id='mapid'></div>
 
@@ -17,9 +17,12 @@ var centre = (<%= @centroids.to_json.html_safe %>);
 
 L.geoJSON(centre, {    
 	pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng);
+        return L.circleMarker(latlng).bindPopup("<dd>" + feature.properties.name + "<dd>");
 	}
 }).addTo(mymap);
+
+
+
 });
 
 </script>
@@ -58,6 +61,4 @@ L.geoJSON(centre, {
 <%end%>
 
 
-<p id="notice"><%= notice %></p>
 
-<br>
