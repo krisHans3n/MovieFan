@@ -1,3 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Checkout</h1>
+
 <% if @order_items.any? %>
   <% @order_items.each do |item| %>
     <p><%= item.merchandise.name %> | <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></p>
@@ -8,4 +12,7 @@
   <p>Your shopping cart is empty.</p>
 <% end %>
 
-<%= link_to 'Checkout', checkouts_url %>
+  
+
+<br>
+

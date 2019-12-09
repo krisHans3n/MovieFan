@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :checkouts
   get 'admin' => 'admin#index'
   resources :order_items
   resources :orders
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resource :cart, only: [:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #get 'carts/show'
+  get 'checkouts/index'
   get 'merchandises/checkout'
   get 'movies/index'
   get 'movies/send_genre'

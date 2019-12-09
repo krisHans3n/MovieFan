@@ -5,6 +5,7 @@ class Merchandise < ApplicationRecord
     has_one :movie
     belongs_to :user, optional: true 
     has_many :order_items
+    has_many :items_ordered
 
     def self.checkposter(checkposter)
         Merchandise.select(id: checkposter)

@@ -2,6 +2,7 @@ require './lib/recommendation.rb'
 
 class User < ApplicationRecord
     has_many :movieswatcheds
+    has_many :orders_paids
     has_many :movies, through: :movieswatcheds
     has_one :address
     has_one :creditcard
