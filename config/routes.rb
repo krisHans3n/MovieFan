@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   resources :merchandises
   resources :homepages
   resources :movies
-  resource :cart, only: [:show]
+  resources :carts#, only: [:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #get 'carts/show'
+  get 'carts/destroy'
   get 'checkouts/index'
   get 'merchandises/checkout'
   get 'movies/index'

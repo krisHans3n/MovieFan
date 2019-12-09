@@ -16,7 +16,15 @@ class CheckoutsController < ApplicationController
 
   # GET /checkouts/new
   def new
-    @checkout = Checkout.new
+    @confirmed_order = ConfirmedOrder.new
+
+    @confirmed_order.user_id = session[:user_id]
+    @confirmed_order.order_id = current_order.id
+    @confirmed_order.save!
+    current_cart = nil
+    flash[:notice]= "Your order is on its way" 
+    redirect_to merchandises_url
+
   end
 
   # GET /checkouts/1/edit

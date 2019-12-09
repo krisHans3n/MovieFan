@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_08_235710) do
+ActiveRecord::Schema.define(version: 2019_12_09_131458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2019_12_08_235710) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "confirmed_orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_confirmed_orders_on_order_id"
+    t.index ["user_id"], name: "index_confirmed_orders_on_user_id"
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "Ctrycode"
     t.decimal "Lat"
@@ -53,15 +62,6 @@ ActiveRecord::Schema.define(version: 2019_12_08_235710) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["users_id"], name: "index_creditcards_on_users_id"
-  end
-
-  create_table "items_paids", force: :cascade do |t|
-    t.bigint "merchandise_id", null: false
-    t.bigint "orders_paid_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["merchandise_id"], name: "index_items_paids_on_merchandise_id"
-    t.index ["orders_paid_id"], name: "index_items_paids_on_orders_paid_id"
   end
 
   create_table "merchandises", force: :cascade do |t|
@@ -122,14 +122,6 @@ ActiveRecord::Schema.define(version: 2019_12_08_235710) do
     t.decimal "total_price"
   end
 
-  create_table "orders_paids", force: :cascade do |t|
-    t.bigint "user_d", null: false
-    t.decimal "total_price"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_d"], name: "index_orders_paids_on_user_d"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -142,14 +134,13 @@ ActiveRecord::Schema.define(version: 2019_12_08_235710) do
   end
 
   add_foreign_key "addresses", "users", column: "users_id"
+  add_foreign_key "confirmed_orders", "orders"
+  add_foreign_key "confirmed_orders", "users"
   add_foreign_key "creditcards", "users", column: "users_id"
-  add_foreign_key "items_paids", "merchandises"
-  add_foreign_key "items_paids", "orders_paids"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
   add_foreign_key "movieswatcheds", "users"
   add_foreign_key "order_items", "carts"
   add_foreign_key "order_items", "merchandises"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "orders_paids", "users", column: "user_d"
 end

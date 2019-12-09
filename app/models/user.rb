@@ -9,6 +9,7 @@ class User < ApplicationRecord
     has_one :subscriptionpayment
     has_many :merchandises
     has_one :account
+    has_one :confirmed_orders
     enum role: [:user, :admin]
     #after_initialize :set_default_role, :if => :new_record?
 
