@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :controllers
   resources :checkouts
   get 'admin' => 'admin#index'
   resources :order_items
