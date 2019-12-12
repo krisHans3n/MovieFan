@@ -1,0 +1,2 @@
+require "merchandise_lib"
+describe MerchandiseController do end 

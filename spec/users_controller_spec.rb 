@@ -1,0 +1,2 @@
+require "user_lib"
+describe UsersController do end 
