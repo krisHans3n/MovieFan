@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :controllers
   resources :checkouts
   get 'admin' => 'admin#index'
   resources :order_items
@@ -12,11 +11,9 @@ Rails.application.routes.draw do
   resources :users
   resources :addresses
   resources :creditcards
-  resources :subscriptionpayments
   resources :merchpayments
   resources :movieswatcheds
   resources :merchandises
-  resources :homepages
   resources :movies
   resources :carts#, only: [:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

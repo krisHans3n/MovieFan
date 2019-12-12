@@ -68,9 +68,7 @@ class UsersController < ApplicationController
 
   private
 
-  def require_authorization
-    redirect_to movies_path unless current_user.role == 'admin'
-  end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

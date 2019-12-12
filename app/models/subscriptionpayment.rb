@@ -1,3 +1,0 @@
-class Subscriptionpayment < ApplicationRecord
-
-end

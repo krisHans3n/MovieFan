@@ -18,6 +18,16 @@ class AdminController < ApplicationController
       @movies_title << mov.Title
       @likes << likes 
     end
+    @qtty = []
+    @orderdate = [] 
+    @con_order = ConfirmedOrder.order("date_trunc('day', updated_at) desc, id desc").pluck("date_trunc('day', updated_at)", :order_id)
+
+    @con_order.each do |dates, orderid| 
+      @orderdate << dates.strftime('%d-%m-%Y')
+      ord = Order.select(:total_price).find_by(id: orderid)
+      @qtty << ord.total_price.to_f
+
+    end
 
 
   end

@@ -1,5 +1,10 @@
 
-<h1>Merchandises</h1>
+<h1>Movie Posters</h1>
+
+<%= form_tag(merchandises_path, method: :get) do%>
+<%= text_field_tag(:poster_search, params[:poster_search]) %>
+<%= submit_tag ("Search")%>
+<% end %>
 
 
     <% @merchandises.each do |merchandise| %>

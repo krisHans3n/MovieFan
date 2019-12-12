@@ -3,15 +3,16 @@
 <table><h2>Recommended Movies for <%= @user.f_name %>:</h2>
   <tr>
     <th>Movie</th>
-    <th>Rating</th>
   </tr>
   <% @user.recommend_movies.each do |key, value| %>
   <tr>
     <td><%= link_to key.Title, key %></td>
-    <td><%= value.round(2) %></td>
   </tr>
   <% end %>
 </table>
+
+<p>
+</p>
 
 <p>
   <%= link_to 'My Cart', cart_path %>

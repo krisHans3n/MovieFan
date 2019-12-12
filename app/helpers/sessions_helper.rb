@@ -36,6 +36,10 @@ module SessionsHelper
         @current_user = nil
         reset_session
     end
+
+    def require_authorization
+        redirect_to movies_path unless current_user.role == 'admin'
+      end
     
 
 end

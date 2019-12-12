@@ -7,8 +7,12 @@ class MerchandisesController < ApplicationController
   # GET /merchandises
   # GET /merchandises.json
   def index
-    @merchandises = Merchandise.all
     @order_item = current_order.order_items.new
+
+    @merchandises = Merchandise.search_poster_title(params[:poster_search]) 
+
+
+
   end
 
   def checkout 
@@ -27,6 +31,7 @@ class MerchandisesController < ApplicationController
   # GET /merchandises/1
   # GET /merchandises/1.json
   def show
+    
   end
 
   # GET /merchandises/new

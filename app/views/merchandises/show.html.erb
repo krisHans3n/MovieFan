@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Name:</strong>
@@ -7,13 +6,15 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @merchandise.price %>
+  <%= number_to_currency @merchandise.price %>
 </p>
 
 <p>
   <strong>Details:</strong>
   <%= @merchandise.details %>
 </p>
+
+
 
 
 <%= link_to 'Back', merchandises_path %>

@@ -24,7 +24,6 @@ L.geoJSON(centre, {
 
 
 });
-
 </script>
 
 <%= form_tag(movies_path, method: :get) do%>
@@ -41,19 +40,6 @@ L.geoJSON(centre, {
 <% end %> 
 <%=  mov.imdbscore %> 
 <%=  mov.Director %> 
-<%
-=begin%>
- <% hold2 = mov.keywords %>
-<% if hold2 == true %>
-<% @h2 = hold2.split(/[\|]/) %>
-<% else  %>
-<% @h2 = "" %>
-<% end %>
-<% @h2.each do |keywords|%>
-<%= link_to keywords, movies_path(:keywordsearch => keywords.to_s) %>
-<% end %>  
-<%
-=end%>
 
 <%= link_to 'See Details', mov %>
 
