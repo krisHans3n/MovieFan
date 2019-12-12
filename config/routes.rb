@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   resources :admin 
   resources :users
   resources :addresses
-  resources :creditcards
   resources :merchpayments
   resources :movieswatcheds
   resources :merchandises

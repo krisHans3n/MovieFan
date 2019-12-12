@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_131458) do
+ActiveRecord::Schema.define(version: 2019_12_12_204536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(version: 2019_12_09_131458) do
     t.index ["user_id"], name: "index_confirmed_orders_on_user_id"
   end
 
+  create_table "controllers", force: :cascade do |t|
+    t.string "Country"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "Ctrycode"
     t.decimal "Lat"
@@ -51,17 +57,6 @@ ActiveRecord::Schema.define(version: 2019_12_09_131458) do
     t.string "Country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "creditcards", force: :cascade do |t|
-    t.integer "number"
-    t.string "expdate"
-    t.string "nameoncard"
-    t.string "organisationtype"
-    t.bigint "users_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_creditcards_on_users_id"
   end
 
   create_table "merchandises", force: :cascade do |t|
@@ -136,7 +131,6 @@ ActiveRecord::Schema.define(version: 2019_12_09_131458) do
   add_foreign_key "addresses", "users", column: "users_id"
   add_foreign_key "confirmed_orders", "orders"
   add_foreign_key "confirmed_orders", "users"
-  add_foreign_key "creditcards", "users", column: "users_id"
   add_foreign_key "movies", "countries", column: "countries_id"
   add_foreign_key "movies", "merchandises", column: "merchandises_id"
   add_foreign_key "movieswatcheds", "users"
