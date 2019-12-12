@@ -7,5 +7,18 @@ class AdminController < ApplicationController
   def index
     @confirmed_orders = ConfirmedOrder.all 
     
+    @liked_movies_hash = Movie.joins(:movieswatcheds).limit(20).group("movies.id").order("count(movie_id) desc").count("movieswatcheds.movie_id")
+
+@movies_title = []
+@likes = []
+
+    @liked_movies_hash.each do |id, likes|
+
+      mov = Movie.select(:Title).find_by(id: id)
+      @movies_title << mov.Title
+      @likes << likes 
+    end
+
+
   end
 end

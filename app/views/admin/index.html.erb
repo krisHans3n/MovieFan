@@ -1,5 +1,8 @@
 <h1>Welcome, Admin</h1>
 
+<div id='container'></div>
+
+
 <% if admin_user? %>
 <% if @confirmed_orders.any? %>
   <% @confirmed_orders.each do |item| %>
@@ -13,3 +16,57 @@
 <%else%>
 <%= flash[:notice]= "not admin" %>
 <% end %>
+
+
+
+<script type="text/javascript">
+
+$(function () {
+    var myChart = Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Most Liked Movies (max 20)'
+    },
+    
+    xAxis: {
+        categories: <%= raw @movies_title %>,
+        tickmarkPlacement: 'on',
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Ammount of likes (various users)' 
+        },
+        tickInterval: 1
+    },
+    tooltip: {
+        split: true,
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: [{
+        name: <%= raw @movies_title %>,
+        data: <%= raw @likes %>
+
+     }]
+});
+});
+</script>
