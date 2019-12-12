@@ -9,10 +9,21 @@ module SessionsHelper
         @current_user ||= User.find_by(id: session[:user_id])
     end
 
+    def not_admin? 
+        unless admin_user? 
+            redirect_to movies_path
+        end
+    end
+
+    def current_user?
+        @current_user
+    end
+
+
     def logged_in?
         #!current_user.nil?
         unless User.find_by(id:session[:user_id])
-            redirect_to login_url, notice:"please log in:)"
+            redirect_to login_url, notice:"Incorrect Details, please try again"
         end
     end
 

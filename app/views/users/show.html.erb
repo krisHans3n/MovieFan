@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
 
-
+<% if @current_user.eql?(@user) %>
 <table><h2>Recommended Movies for <%= @user.f_name %>:</h2>
   <tr>
     <th>Movie</th>
@@ -17,9 +16,17 @@
 <p>
   <%= link_to 'My Cart', cart_path %>
 </p>
-<p>
-  <%= link_to 'My Orders', order_items_path %>
-</p>
+
+<strong>My Orders</strong>
+<% if @confirmed_orders.any? %>
+  <% @confirmed_orders.each do |item| %>
+    <p><%= item.user.f_name %></p> | 
+    <p><%= item.order.id %></p> 
+    <p><%= item.order.total_price %></p>
+  <% end %>
+<% else %>
+  <p>No Orders</p>
+<% end %>
 
 
 <p>
@@ -38,3 +45,8 @@
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %>
+
+<% else %>
+<%= flash[:notice] = "you dont have access" %>
+
+<% end %>

@@ -1,5 +1,11 @@
 class AdminController < ApplicationController
+  before_action :admin_user?, only: [:index]
+  before_action :not_admin? 
+
+
+  
   def index
-    @total_orders = Order.count 
+    @confirmed_orders = ConfirmedOrder.all 
+    
   end
 end
