@@ -1,2 +1,2 @@
-require "user_lib"
+require './spec/lib/user_lib'
 describe UsersController do end 

@@ -11,6 +11,9 @@ namespace :filltables do
     Merchandise.destroy_all
     User.destroy_all 
 
+    user_user = User.create!( :email => 'bob@mail.com', :password => '123456', :f_name => 'bob', :l_name => 'son' )
+    user_user.save!
+
     user = User.create!( :email => 'admin@admin.com', :password => '123456', :f_name => 'admin', :l_name => 'admin', :role => 'admin' )
     user.role = 'admin'
     user.save!

@@ -16,11 +16,30 @@ var mp = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?acces
 var centre = (<%= @centroids.to_json.html_safe %>);
 
 L.geoJSON(centre, {    
+	style: style,
 	pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng).bindPopup("<dd>" + feature.properties.name + "<dd>");
+        return L.circleMarker(latlng, {style: style}).bindPopup("<dd>" + "We have " + feature.properties.value + " movies from " + feature.properties.name + "<dd>");
 	}
 }).addTo(mymap);
 
+function getColor(d) {
+		return d > 1 ? '#d73027' :
+				d > 2 ? '#f46d43' :
+				d > 30  ? '#fdae61' :
+				d > 228  ? '#fee08b' :
+				d > 700   ? '#d9ef8b' :
+							'#1a9850';
+	}
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'grey',
+			dashArray: '3',
+			fillOpacity: 0.8,
+			fillColor: getColor(feature.properties.value)
+		};
+	}
 
 
 });

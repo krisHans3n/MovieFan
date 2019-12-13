@@ -7,14 +7,16 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
 
+    @m = [] 
     country_list = []
     country_list = Movie.distinct.pluck(:productioncountry)
+    @m = Movie.group(:productioncountry).count
 
     @country = Country.all
     @centroids = []
     @country.each do |r|
-      if country_list.include? r.Country
-      @template = { "type": "Feature", "properties": {"name": r.Country}, "geometry": {"type": "Point", "coordinates": [r.Long, r.Lat]} }
+      if (country_list && @m).include? r.Country 
+      @template = { "type": "Feature", "properties": {"name": r.Country, "value": @m[r.Country] }, "geometry": {"type": "Point", "coordinates": [r.Long, r.Lat]} }
       @centroids << @template 
       else  
         next
